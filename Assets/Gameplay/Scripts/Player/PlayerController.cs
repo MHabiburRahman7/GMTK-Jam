@@ -468,7 +468,7 @@ namespace TestGame.Player
                 //
                 // Just reload weapon.
                 //
-                this.CurrentWeapon.Reload();
+                //this.CurrentWeapon.Reload();
             }
         }
 
@@ -493,7 +493,7 @@ namespace TestGame.Player
                     //
                     // If so, grab ammo from it - our is better.
                     //
-                    current.GrabAmmo(weapon);
+                    //current.GrabAmmo(weapon);
                 }
             }
         }

@@ -120,24 +120,6 @@ namespace TestGame.Gameplay
 
         public void UpdateWeapon(Weapon weapon)
         {
-            if (weapon.IsReloading)
-            {
-                this.WeaponClipAmmo.text = "Reloading...";
-            }
-            else
-            {
-                this.WeaponClipAmmo.text = String.Format("{0}/{1}", weapon.CurrentClipAmmo, weapon.MaxClipAmmo);
-            }
-
-            if (weapon.InfiniteAmmo)
-            {
-                this.WeaponTotalAmmo.text = "\u221e";
-            }
-            else
-            {
-                this.WeaponTotalAmmo.text = String.Format("{0}/{1}", weapon.CurrentBagAmmo, weapon.MaxBagAmmo);
-            }
-
             this.WeaponImage.sprite = weapon.AvatarImage;
         }
 
