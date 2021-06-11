@@ -80,7 +80,6 @@ namespace TestGame.Gameplay
             {
                 var progress = character.Energy / character.EnergyMax;
                 var fillAmount = Mathf.Clamp01(progress);
-                Debug.Log(EnergyBar);
 
                 this.EnergyBar.fillAmount = fillAmount;
 

@@ -80,6 +80,11 @@ namespace TestGame.Player
         public float SprintSpeed = 7.0F;
 
         //
+        // Dash duration
+        //
+        public float dashDistance = 2f;
+
+        //
         // Current speed.
         //
         private float m_CurrentSpeed = 0.0F;
@@ -230,6 +235,8 @@ namespace TestGame.Player
             //
             lookDirectionAngle = FixupKeyboardDirectionAngle(lookDirectionAngle);
 
+            HandleDash(Body.transform.right);
+
             //
             //  Angle = 
             //
@@ -372,6 +379,13 @@ namespace TestGame.Player
             }
 
             return moveDirectionAngle;
+        }
+
+        private void HandleDash(Vector3 dashDirection) {
+            if (Input.GetButtonDown("Dash")) {
+                Debug.Log("dashing");
+                this.m_Agent.Move(dashDirection * dashDistance);
+            }
         }
 
         private void RotateCamera(float deltaTime)
