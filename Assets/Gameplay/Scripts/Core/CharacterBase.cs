@@ -12,13 +12,8 @@ namespace TestGame.Core
     public class CharacterBase : MonoBehaviour
     {
         [Header("Configuration")]
-        public float Health;
-        public float HealthMax;
-        public float SuperHealthMax;
-
-        public float Armor;
-        public float ArmorMax;
-        public float SuperArmorMax;
+        public float Energy;
+        public float EnergyMax;
 
         public bool IsAlive = true;
 
@@ -29,16 +24,14 @@ namespace TestGame.Core
                 //
                 // Compute damage on armor and health.
                 //
-                var armorDamage = Mathf.Min(this.Armor, damage);
-                var healthDamage = Mathf.Min(this.Health, damage - armorDamage);
+                var healthDamage = Mathf.Min(this.Energy, damage);
 
                 //
                 // Update proper states.
                 //
-                this.Armor -= armorDamage;
-                this.Health -= healthDamage;
+                this.Energy -= healthDamage;
                 
-                if (this.Health <= 0.0F)
+                if (this.Energy <= 0.0F)
                 {
                     //
                     // Notify that character died. Additionally, latch to not die again.
@@ -58,12 +51,7 @@ namespace TestGame.Core
 
         public void AddHealth(float points)
         {
-            this.Health = Mathf.Min(this.Health + points, this.SuperHealthMax);
-        }
-
-        public void AddArmor(float points)
-        {
-            this.Armor = Mathf.Min(this.Armor + points, this.SuperArmorMax);
+            this.Energy = this.Energy + points;
         }
     }
 }

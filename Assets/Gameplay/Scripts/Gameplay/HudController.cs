@@ -23,13 +23,9 @@ namespace TestGame.Gameplay
         [Header("GameController")]
         public GameController GameController;
 
-        [Header("Health Panel")]
-        public Image HealthBar;
-        public Text HealthValue;
-
-        [Header("Armor Panel")]
-        public Image ArmorBar;
-        public Text ArmorValue;
+        [Header("Energy Panel")]
+        public Image EnergyBar;
+        public Text EnergyValue;
 
         [Header("Current Weapon Panel")]
         public Image WeaponImage;
@@ -82,29 +78,17 @@ namespace TestGame.Gameplay
             // Update health progress bar and values.
             //
             {
-                var progress = character.Health / character.HealthMax;
+                var progress = character.Energy / character.EnergyMax;
                 var fillAmount = Mathf.Clamp01(progress);
+                Debug.Log(EnergyBar);
 
-                this.HealthBar.fillAmount = fillAmount;
+                this.EnergyBar.fillAmount = fillAmount;
 
                 //
                 // Update health value.
                 //
 
-                this.HealthValue.text = String.Format("{0}/{1}", (int)character.Health, (int)character.HealthMax);
-            }
-
-            {
-                var progress = character.Armor / character.ArmorMax;
-                var fillAmount = Mathf.Clamp01(progress);
-
-                this.ArmorBar.fillAmount = fillAmount;
-
-                //
-                // Update health value.
-                //
-
-                this.ArmorValue.text = String.Format("{0}/{1}", (int)character.Armor, (int)character.ArmorMax);
+                this.EnergyValue.text = String.Format("{0}/{1}", (int)character.Energy, (int)character.EnergyMax);
             }
         }
 

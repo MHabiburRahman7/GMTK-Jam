@@ -32,6 +32,7 @@ namespace TestGame.Weapons
     public class Weapon : MonoBehaviour
     {
         [Header("Weapon Stats")]
+        public float energyPerShot;
         public WeaponType WeaponType;
         public float Spread;
         public float Damage;
@@ -90,10 +91,12 @@ namespace TestGame.Weapons
         // Inter-shoot timeout timer.
         //
         private float m_Timer;
+        private TestGame.Player.PlayerCharacter player;
 
         private void OnEnable()
         {
             this.m_Timer = 0.0F;
+            player = FindObjectOfType<TestGame.Player.PlayerCharacter>();
         }
 
         private void Update()
@@ -114,6 +117,7 @@ namespace TestGame.Weapons
                 // Spawn bullet.
                 //
                 this.SpawnAmmo(this.Spread);
+                player.Energy -= energyPerShot;
             }
         }
     }
