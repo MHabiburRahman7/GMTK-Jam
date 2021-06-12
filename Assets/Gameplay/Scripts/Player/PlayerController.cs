@@ -80,9 +80,13 @@ namespace TestGame.Player
         public float SprintSpeed = 7.0F;
 
         //
-        // Dash duration
+        // Dash distance
         //
         public float dashDistance = 2f;
+
+        public ParticleSystem dashPlayerParticles; //player particles using energy to dash
+
+        public ParticleSystem dashParticles; //ground particles on dash
 
         //
         // Current speed.
@@ -383,7 +387,8 @@ namespace TestGame.Player
 
         private void HandleDash(Vector3 dashDirection) {
             if (Input.GetButtonDown("Dash")) {
-                Debug.Log("dashing");
+                Instantiate(dashParticles, transform.position, Quaternion.Euler(dashDirection));
+                dashPlayerParticles.Play();
                 this.m_Agent.Move(dashDirection * dashDistance);
             }
         }
