@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace TestGame
+namespace TestGame.Player
 {
     [RequireComponent(typeof(LineRenderer))]
     public class LeashCtrl : MonoBehaviour
@@ -14,15 +14,24 @@ namespace TestGame
 
         //asdasdsad
         public float minRange;
+        //[Range(0, 100)]
+        //public float playerHealth, botHealth;
+        [Range(0, 10)]
+        public float p_healtIncrease, p_healthDecrease, e_healthIncrease, e_healthDecrease;
+
+
         public GameObject fetchedEnemy, nextFetchedEnemy;
 
         public GameObject[] EnemyList;
+        public PlayerCharacter m_playerChar;
+        public Bots.BotCharacter m_botChar;
 
         // Start is called before the first frame update
         void Start()
         {
             line = gameObject.GetComponent<LineRenderer>();
             line.useWorldSpace = false;
+            m_playerChar = this.gameObject.GetComponent<PlayerCharacter>();
         }
 
         // Update is called once per frame
@@ -34,16 +43,30 @@ namespace TestGame
             if (Input.GetMouseButton(1))
             {
                 nextFetchedEnemy = null;
-                Debug.Log("leash released");
+                //Debug.Log("leash released");
                 CreatePoints();
             }
             else if (Input.GetMouseButtonUp(1))
             {
-                EnergyFetched();
+                if (EnemyFetched())
+                {
+                    AdjustThePlayer(true, true);
+                }
             }
 
             if (fetchedEnemy != null)
-                DrawRope();
+            {
+                if (IsStillInsideTheRange())
+                {
+                    DrawRope();
+                    AdjustThePlayer(true, false);
+                }
+                else
+                {
+                    AdjustThePlayer(false, true);
+                    deleteLine();
+                }
+            }
 
             GetEnemies();
 
@@ -74,17 +97,14 @@ namespace TestGame
 
         public void deleteLine()
         {
-            if(nextFetchedEnemy == null)
-            {
-                Debug.Log("delete called");
-                line.useWorldSpace = false;
-                line.positionCount = 0;
+            Debug.Log("delete called");
+            line.useWorldSpace = false;
+            line.positionCount = 0;
 
-                fetchedEnemy = null;
-            }
+            fetchedEnemy = null;
         }
 
-        private bool EnergyFetched()
+        private bool EnemyFetched()
         {
             // make a plane in the world level to the player
             Plane plane = new Plane(transform.up, gameObject.transform.position);
@@ -103,9 +123,6 @@ namespace TestGame
             //get 3 closest characters (to referencePos)
             var nClosest = EnemyList.OrderBy(t => (t.transform.position - mousePos).sqrMagnitude)
                                        .FirstOrDefault();
-            //.Take(3)   //or use .FirstOrDefault();  if you need just one
-            //.ToArray();
-            //Debug.Log("closestEnemy: " + nClosest.name);
 
             //check whether inside the range
             if((transform.position - nClosest.gameObject.transform.position).sqrMagnitude <= minRange*10)
@@ -127,6 +144,39 @@ namespace TestGame
             }
         }
 
+        public void AdjustThePlayer(bool isAttached, bool change) 
+        {
+
+            if (change)
+            {
+                fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
+                change = false;
+            }
+
+            if (isAttached)
+            {
+                if(m_playerChar.Health < 100)
+                    m_playerChar.AddHealth(p_healtIncrease);
+
+                if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 0)
+                {
+                    fetchedEnemy.GetComponent<Bots.BotCharacter>().TakeDamage(e_healthDecrease * Time.deltaTime);
+                }
+                else
+                {
+                    AdjustThePlayer(false, true);
+                    deleteLine();
+                }
+            }
+            else
+            {
+                //GAME OVER
+                m_playerChar.AddHealth(p_healthDecrease * Time.deltaTime);
+                fetchedEnemy.GetComponent<Bots.BotCharacter>().TakeDamage(0);
+                //fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
+            }
+        }
+
         public void DrawRope()
         {
             //Attach the rope
@@ -134,7 +184,14 @@ namespace TestGame
 
             line.SetPosition(0, transform.position);
             line.SetPosition(1, fetchedEnemy.transform.position);
-            //line.SetPosition(i, new Vector3(x, 0, z));
+        }
+
+        public bool IsStillInsideTheRange()
+        {
+            if ((transform.position - fetchedEnemy.transform.position).sqrMagnitude <= minRange * 10)
+                return true;
+            else
+                return false;
         }
 
         public void GetEnemies()
