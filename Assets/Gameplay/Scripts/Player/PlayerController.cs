@@ -393,10 +393,13 @@ namespace TestGame.Player
             if (Input.GetButtonDown("Dash") && canDash) {
                 //spawn the particles before dashing so aprticles are spawn of the beginning point
                 Instantiate(dashParticles, transform.position, Quaternion.Euler(dashDirection));
-                dashPlayerParticles.Play();
+                Instantiate(dashPlayerParticles, transform.position, Quaternion.Euler(dashDirection));
 
                 //moves the player
                 this.m_Agent.Move(dashDirection * dashDistance);
+
+                //landing particles
+                Instantiate(dashPlayerParticles, transform.position, Quaternion.Euler(dashDirection));
 
                 //processes cooldown and disallows other dashes until it's up again
                 StartCoroutine("DashCooldown");
