@@ -26,12 +26,16 @@ namespace TestGame.Player
         public PlayerCharacter m_playerChar;
         public Bots.BotCharacter m_botChar;
 
+        //public RopeJointController m_ropeJointController;
+        //public RopeControllerSimple m_ropeControllerSimple;
+
         // Start is called before the first frame update
         void Start()
         {
             line = gameObject.GetComponent<LineRenderer>();
+            line.positionCount = 0;
             line.useWorldSpace = false;
-            m_playerChar = this.gameObject.GetComponent<PlayerCharacter>();
+            m_playerChar = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerCharacter>();
         }
 
         // Update is called once per frame
@@ -58,6 +62,7 @@ namespace TestGame.Player
                 }
             }
 
+            //Regenerate because it is fetched
             if (fetchedEnemy != null)
             {
                 if (IsStillInsideTheRange())
@@ -70,6 +75,12 @@ namespace TestGame.Player
                     AdjustThePlayer(false, true);
                     deleteLine();
                 }
+            }
+            //Degenerate becasue it is not fetched
+            else
+            {
+                Debug.Log("Degenerate !!!");
+                AdjustThePlayer(false, false);
             }
 
             GetEnemies();
@@ -128,21 +139,32 @@ namespace TestGame.Player
             var nClosest = EnemyList.OrderBy(t => (t.transform.position - mousePos).sqrMagnitude)
                                        .FirstOrDefault();
 
+            //if the fetched enemy is ded enemy
+            if (nClosest.gameObject.GetComponent<Bots.BotCharacter>().Health < 1)
+                return false;
+
             //check whether inside the range of the player
             if((transform.position - nClosest.gameObject.transform.position).sqrMagnitude <= minRange*10)
             {
                 fetchedEnemy = nClosest.gameObject;
                 nextFetchedEnemy = fetchedEnemy;
 
-                Debug.Log("distance: " + (transform.position - fetchedEnemy.transform.position).sqrMagnitude);
-                Debug.Log("the mouse input: " + mousePos);
+                //Debug.Log("distance: " + (transform.position - fetchedEnemy.transform.position).sqrMagnitude);
+               // Debug.Log("the mouse input: " + mousePos);
                 line.useWorldSpace = true;
+
+                //m_ropeJointController.StartInit(gameObject, fetchedEnemy.gameObject);
+                //InitRopeJoint();
 
                 return true;
             }
             else
             {
-                Debug.Log("Enemy is outta here False");
+                //Debug.Log("Enemy is outta here False");
+                //DestroyRopeJoint();
+                //m_ropeJointController.DestroyRope();
+
+                //m_ropeJointController.DestroyRope();
                 deleteLine();
                 return false;
             }
@@ -156,7 +178,6 @@ namespace TestGame.Player
                 if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 1)
                     fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
                 change = false;
-
             }
 
             if (isAttached)
@@ -171,10 +192,16 @@ namespace TestGame.Player
                 else // if the enemy is dead, update this function again
                 {
                     if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 0)
+                    {
                         AdjustThePlayer(false, true);
+                        //DestroyRopeJoint();
+                        //m_ropeJointController.DestroyRope();
+                    }
                     else
                     {
                         deleteLine();
+                        //DestroyRopeJoint();
+                        //m_ropeJointController.DestroyRope();
                         AdjustThePlayer(false, false);
                     }
                 }
@@ -182,8 +209,7 @@ namespace TestGame.Player
             else
             {
                 //GAME OVER
-                m_playerChar.AddHealth(p_healthDecrease * Time.deltaTime);
-                fetchedEnemy.GetComponent<Bots.BotCharacter>().TakeDamage(0);
+                m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime);
                 //fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
             }
         }
@@ -196,6 +222,18 @@ namespace TestGame.Player
             line.SetPosition(0, transform.position);
             line.SetPosition(1, fetchedEnemy.transform.position);
         }
+
+        //public void InitRopeJoint()
+        //{
+        //    m_ropeControllerSimple.whatTheRopeIsConnectedTo = m_playerChar.gameObject.transform;
+        //    m_ropeControllerSimple.whatIsHangingFromTheRope = fetchedEnemy.gameObject.transform;
+        //}
+
+        //public void DestroyRopeJoint()
+        //{
+        //    m_ropeControllerSimple.whatTheRopeIsConnectedTo = null;
+        //    m_ropeControllerSimple.whatIsHangingFromTheRope = null;
+        //}
 
         public bool IsStillInsideTheRange()
         {
