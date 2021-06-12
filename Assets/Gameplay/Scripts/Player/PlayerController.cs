@@ -30,6 +30,8 @@ namespace TestGame.Player
         //
         public GameObject Body;
 
+        public GameObject Legs; // legs of the player
+
         //
         // Laser pointer. It really should be part of gun...
         //
@@ -75,11 +77,6 @@ namespace TestGame.Player
         //
         public float MoveSpeed = 4.0F;
 
-        //
-        // Sprint speed.
-        //
-        public float SprintSpeed = 7.0F;
-
         //distance of the dash in meters
         public float dashDistance = 2f;
 
@@ -103,6 +100,8 @@ namespace TestGame.Player
         private bool canDash = true;
         
         private bool m_IsRunning = false;
+
+        private Animator animator;
 
         //
         // Current control type.
@@ -139,6 +138,9 @@ namespace TestGame.Player
         
         private void Start()
         {
+
+            animator = Legs.GetComponent<Animator>();
+
             //
             // Acquires navmesh agent.
             //
@@ -175,6 +177,11 @@ namespace TestGame.Player
             // And select first weapon.
             //
             this.SelectWeapon(0);
+
+            //
+            // Adjust speed.
+            //
+            this.m_CurrentSpeed = this.MoveSpeed;
         }
 
         /// <summary>
@@ -207,6 +214,10 @@ namespace TestGame.Player
                 Input.GetAxis("Horizontal"),
                 Input.GetAxis("Vertical")
             );
+
+            if (rawMove == Vector2.zero) {
+                //stop the animation
+            }
 
             //
             // Initial angles for move and look.
@@ -243,7 +254,7 @@ namespace TestGame.Player
             //
             lookDirectionAngle = FixupKeyboardDirectionAngle(lookDirectionAngle);
 
-            HandleDash(Body.transform.right);
+            HandleDash(-Body.transform.right);
 
             //
             //  Angle = 
@@ -288,9 +299,14 @@ namespace TestGame.Player
                 //
                 // Add-up stick space rotation to controller orientation.
                 //
-                var rotation = Quaternion.Euler(m_LookAngle + 90f, 0.0f, 0.0F);
+                var difference = Quaternion.Euler(moveDirectionAngle + 90f, 0f, 0);
+
+                var rotation = Quaternion.Euler(m_LookAngle + 90f, 0.0f, 0.0F) * Quaternion.Inverse(difference);
                 this.Body.transform.localRotation = Quaternion.RotateTowards(this.Body.transform.localRotation, Quaternion.Inverse(rotation), this.RotationAngularSpeed * deltaTime);
             }
+
+            var legsRotation = Quaternion.Euler(0, moveDirectionAngle + 90f, 0);
+            Legs.transform.localRotation = Quaternion.RotateTowards(this.Legs.transform.localRotation, legsRotation, this.RotationAngularSpeed * deltaTime);
         }
 
         private void HandleWeaponChange()
@@ -364,11 +380,6 @@ namespace TestGame.Player
                 //
                 var direction = new Vector3(rawMove.x, 0.0F, rawMove.y);
                 direction.Normalize();
-
-                //
-                // Adjust speed.
-                //
-                this.m_CurrentSpeed = this.m_IsRunning ? this.SprintSpeed : this.MoveSpeed;
 
                 //
                 // Compute relative move vector.
@@ -604,6 +615,14 @@ namespace TestGame.Player
                 //
                 this.CurrentWeapon.Shoot();
             }
+        }
+
+        public void DivideCurrentSpeed(float divisionFactor) {
+            m_CurrentSpeed /= divisionFactor;
+        }
+
+        public void RestoreBaseSpeed() {
+            m_CurrentSpeed = MoveSpeed;
         }
     }
 }
