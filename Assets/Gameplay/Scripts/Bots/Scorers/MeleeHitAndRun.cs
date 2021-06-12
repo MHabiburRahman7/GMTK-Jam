@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestGame.AI;
+using UnityEngine;
 
 namespace TestGame.Bots.Scorers
 {
     /// <summary>
     /// This scorer promotes action that uses hit-and-run.
     /// </summary>
+     [CreateAssetMenu(fileName ="MeleeHitAndRun.scorer.asset", menuName ="AI/Scorers/Melee Hit And Run")]
     public class MeleeHitAndRun : AIScorer
     {
         /// <summary>

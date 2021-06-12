@@ -10,6 +10,7 @@ namespace TestGame.Bots.Scorers
     /// <summary>
     /// Evaluates score based on distance to player.
     /// </summary>
+    [CreateAssetMenu(fileName ="DistanceToPlayer.scorer.asset", menuName ="AI/Scorers/Distance to player")]
     public class DistanceToPlayer : AIScorer
     {
         /// <summary>

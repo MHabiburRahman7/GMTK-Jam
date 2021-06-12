@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91dff5516beac214ba381ff7331d25f4, type: 3}
+  m_Name: default.KeepDistance.action
+  m_EditorClassIdentifier: 
+  Scorers:
+  - {fileID: 11400000, guid: 2e950d8cd45e2764da049fe7b4bc8103, type: 2}
+  - {fileID: 11400000, guid: a983b3009961d1143aaf2c8a99c18de8, type: 2}
+  - {fileID: 11400000, guid: 4596d667ca02a1d4db01d297f51753b4, type: 2}
+  Interval: 0.2
+  PathEvaluationLimit: 3

@@ -10,6 +10,8 @@ namespace TestGame.Bots.Actions
     /// <summary>
     /// Moves bot to player.
     /// </summary>
+    [CreateAssetMenu(fileName ="MoveToPlayer.action.asset", menuName ="AI/Actions/Move To Player")]
+
     public class MoveToPlayer : AIAction
     {
         public override void Execute(IAIContext context)

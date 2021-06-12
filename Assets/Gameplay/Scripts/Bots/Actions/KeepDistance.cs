@@ -10,6 +10,8 @@ namespace TestGame.Bots.Actions
     /// <summary>
     /// Bot tries to keep distance to player.
     /// </summary>
+       [CreateAssetMenu(fileName ="KeepDistance.action.asset", menuName ="AI/Actions/Keep Distance")]
+
     public class KeepDistance : AIAction
     {
         public int PathEvaluationLimit = 10;
@@ -36,7 +38,7 @@ namespace TestGame.Bots.Actions
                 //
                 // Bot tries to perform shot from distance. So, if player gets closer to bot, it runs away without shooting.
                 //
-                var randomRange = UnityEngine.Random.Range(BotController.Range1 + 1, BotController.Range2 - 1);
+                var randomRange = UnityEngine.Random.Range(bot.Controller.current_controller.Range1 + 1, bot.Controller.current_controller.Range2 - 1);
 
 
                 //

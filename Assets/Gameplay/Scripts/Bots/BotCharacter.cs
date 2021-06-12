@@ -7,6 +7,7 @@ using TestGame.Core;
 using TestGame.Gameplay;
 using TestGame.Weapons;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace TestGame.Bots
 {
@@ -102,5 +103,7 @@ namespace TestGame.Bots
                 this.Weapon.Shoot();
             }
         }
+
+        public bool isCharging;
     }
 }
