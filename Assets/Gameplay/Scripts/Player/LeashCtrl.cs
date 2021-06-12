@@ -52,6 +52,10 @@ namespace TestGame.Player
                 {
                     AdjustThePlayer(true, true);
                 }
+                else
+                {
+                    AdjustThePlayer(false, true);
+                }
             }
 
             if (fetchedEnemy != null)
@@ -124,7 +128,7 @@ namespace TestGame.Player
             var nClosest = EnemyList.OrderBy(t => (t.transform.position - mousePos).sqrMagnitude)
                                        .FirstOrDefault();
 
-            //check whether inside the range
+            //check whether inside the range of the player
             if((transform.position - nClosest.gameObject.transform.position).sqrMagnitude <= minRange*10)
             {
                 fetchedEnemy = nClosest.gameObject;
@@ -149,23 +153,30 @@ namespace TestGame.Player
 
             if (change)
             {
-                fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
+                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 1)
+                    fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
                 change = false;
+
             }
 
             if (isAttached)
             {
                 if(m_playerChar.Health < 100)
-                    m_playerChar.AddHealth(p_healtIncrease);
+                    m_playerChar.AddHealth(p_healtIncrease * Time.deltaTime);
 
                 if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 0)
                 {
                     fetchedEnemy.GetComponent<Bots.BotCharacter>().TakeDamage(e_healthDecrease * Time.deltaTime);
                 }
-                else
+                else // if the enemy is dead, update this function again
                 {
-                    AdjustThePlayer(false, true);
-                    deleteLine();
+                    if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 0)
+                        AdjustThePlayer(false, true);
+                    else
+                    {
+                        deleteLine();
+                        AdjustThePlayer(false, false);
+                    }
                 }
             }
             else
