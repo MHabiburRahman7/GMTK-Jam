@@ -288,8 +288,8 @@ namespace TestGame.Player
                 //
                 // Add-up stick space rotation to controller orientation.
                 //
-                var rotation = Quaternion.Euler(0.0F, m_LookAngle, 0.0F) * this.transform.rotation;
-                this.Body.transform.rotation = Quaternion.RotateTowards(this.Body.transform.rotation, rotation, this.RotationAngularSpeed * deltaTime);
+                var rotation = Quaternion.Euler(m_LookAngle + 90f, 0.0f, 0.0F);
+                this.Body.transform.localRotation = Quaternion.RotateTowards(this.Body.transform.localRotation, Quaternion.Inverse(rotation), this.RotationAngularSpeed * deltaTime);
             }
         }
 
