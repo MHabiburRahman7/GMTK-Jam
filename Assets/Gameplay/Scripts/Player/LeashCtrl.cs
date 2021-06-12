@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace TestGame
 {
+    //Leash Control here
     [RequireComponent(typeof(LineRenderer))]
     public class LeashCtrl : MonoBehaviour
     {
