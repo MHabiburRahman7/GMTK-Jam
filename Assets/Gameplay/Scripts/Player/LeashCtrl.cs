@@ -141,7 +141,7 @@ namespace TestGame.Player
                                        .FirstOrDefault();
 
             //if the fetched enemy is ded enemy
-            if (nClosest.gameObject.GetComponent<Bots.BotCharacter>().Health < 1)
+            if (nClosest.gameObject.GetComponent<Bots.BotCharacter>().Energy < 1)
                 return false;
 
             //check whether inside the range of the player
@@ -176,23 +176,23 @@ namespace TestGame.Player
 
             if (change)
             {
-                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 1)
+                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 1)
                     fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
                 change = false;
             }
 
             if (isAttached)
             {
-                if(m_playerChar.Health < 100)
+                if(m_playerChar.Energy < 100)
                     m_playerChar.AddHealth(p_healtIncrease * Time.deltaTime);
 
-                if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 0)
+                if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 0)
                 {
                     fetchedEnemy.GetComponent<Bots.BotCharacter>().TakeDamage(e_healthDecrease * Time.deltaTime);
                 }
                 else // if the enemy is dead, update this function again
                 {
-                    if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Health > 0)
+                    if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 0)
                     {
                         AdjustThePlayer(false, true);
                         //DestroyRopeJoint();
