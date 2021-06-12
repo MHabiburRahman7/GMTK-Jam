@@ -6,6 +6,7 @@ using TestGame.Bots;
 using TestGame.Weapons;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 namespace TestGame.Player
 {
@@ -79,6 +80,16 @@ namespace TestGame.Player
         //
         public float SprintSpeed = 7.0F;
 
+        //distance of the dash in meters
+        public float dashDistance = 2f;
+
+        //time between two uses of dash
+        public float dashCooldown = 2f;
+
+        public ParticleSystem dashPlayerParticles; //player particles using energy to dash
+
+        public ParticleSystem dashParticles; //ground particles on dash
+
         //
         // Current speed.
         //
@@ -88,6 +99,8 @@ namespace TestGame.Player
         // Look angle.
         //
         private float m_LookAngle = 0.0F;
+
+        private bool canDash = true;
         
         private bool m_IsRunning = false;
 
@@ -229,6 +242,8 @@ namespace TestGame.Player
             // Mouse requires special handling, because actor will stare at mouse regardles of its movement.
             //
             lookDirectionAngle = FixupKeyboardDirectionAngle(lookDirectionAngle);
+
+            HandleDash(Body.transform.right);
 
             //
             //  Angle = 
@@ -374,6 +389,28 @@ namespace TestGame.Player
             return moveDirectionAngle;
         }
 
+        private void HandleDash(Vector3 dashDirection) {
+            if (Input.GetButtonDown("Dash") && canDash) {
+                //spawn the particles before dashing so aprticles are spawn of the beginning point
+                Instantiate(dashParticles, transform.position, Quaternion.Euler(dashDirection));
+                dashPlayerParticles.Play();
+
+                //moves the player
+                this.m_Agent.Move(dashDirection * dashDistance);
+
+                //processes cooldown and disallows other dashes until it's up again
+                StartCoroutine("DashCooldown");
+                canDash = false;
+            }
+        }
+
+        //processes the cooldown of the dash
+        // waits for 2 seconds, then allows to dash again
+        private IEnumerator DashCooldown() {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+        }
+
         private void RotateCamera(float deltaTime)
         {
             //
@@ -468,7 +505,7 @@ namespace TestGame.Player
                 //
                 // Just reload weapon.
                 //
-                this.CurrentWeapon.Reload();
+                //this.CurrentWeapon.Reload();
             }
         }
 
@@ -493,7 +530,7 @@ namespace TestGame.Player
                     //
                     // If so, grab ammo from it - our is better.
                     //
-                    current.GrabAmmo(weapon);
+                    //current.GrabAmmo(weapon);
                 }
             }
         }

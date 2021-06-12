@@ -170,12 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8050b4c656b440543b495d45cd599e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 75
-  HealthMax: 75
-  SuperHealthMax: 0
-  Armor: 0
-  ArmorMax: 0
-  SuperArmorMax: 0
+  Energy: 100
+  EnergyMax: 100
   IsAlive: 1
   Speed: 10
   MeleeAttack: 2

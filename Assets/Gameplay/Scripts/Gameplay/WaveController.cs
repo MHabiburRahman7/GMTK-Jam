@@ -43,7 +43,7 @@ namespace TestGame.Gameplay
             //
             --this.EnemiesAlive;
             ++this.TotalEnemiesDown;
-            this.Score += (int)character.HealthMax;
+            this.Score += (int)character.EnergyMax;
 
             //
             // Notify HUD to pull that info back.
