@@ -79,6 +79,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 10
   Force: 0
+  explosionRadius: 0
+  isEMP: 0
+  EMPPrefab: {fileID: 0}
   Tracer: {fileID: 0}
 --- !u!122 &1178654766692105304
 Halo:
@@ -90,7 +93,7 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4281846243
+    rgba: 4294832661
   m_Size: 0.2
 --- !u!96 &1206541909067574600
 TrailRenderer:
@@ -164,9 +167,9 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 0.9882353, g: 0.99215686, b: 0.7372549, a: 1}
-      key2: {r: 0.9254902, g: 0.6431373, b: 0.28627452, a: 1}
-      key3: {r: 0.45490196, g: 0.1254902, b: 0.1254902, a: 1}
+      key1: {r: 0.5707547, g: 0.9796478, b: 1, a: 1}
+      key2: {r: 0.08235294, g: 0.9490196, b: 0.99215686, a: 1}
+      key3: {r: 0.04888932, g: 0.56339127, b: 0.589, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}

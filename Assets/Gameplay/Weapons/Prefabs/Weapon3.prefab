@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ed1bc43fc0c24d9040e1f393ab721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyPerShot: 10
+  energyPerShot: 20
   WeaponType: 3
   Spread: 1
   Damage: 100

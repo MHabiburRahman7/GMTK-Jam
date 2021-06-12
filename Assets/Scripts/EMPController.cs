@@ -13,7 +13,7 @@ namespace TestGame
         public float duration = 10f;
 
         private PlayerController player;
-        private List<NavMeshAgent> bots;
+        private List<NavMeshAgent> bots = new List<NavMeshAgent>();
 
         private void Start() {
             StartCoroutine("AutoDestroy");
@@ -22,7 +22,6 @@ namespace TestGame
         private void OnTriggerEnter(Collider other) {
             player = other.gameObject.GetComponent<PlayerController>();
             NavMeshAgent bot = other.gameObject.GetComponent<NavMeshAgent>();
-            bots.Add(bot);
 
             if (player != null) {
                 Debug.Log("playerEntered");
@@ -30,6 +29,7 @@ namespace TestGame
             }
 
             if (bot != null) {
+                bots.Add(bot);
                 bot.speed /= divisionFactor;
             }
         }
@@ -52,9 +52,11 @@ namespace TestGame
             yield return new WaitForSeconds(duration);
             if (player != null)
                 player.RestoreBaseSpeed();
+                
             foreach(NavMeshAgent bot in bots) {
                 bot.speed *= divisionFactor;
             }
+    
             Destroy(this.gameObject);
         }
     }
