@@ -95,16 +95,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ed1bc43fc0c24d9040e1f393ab721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyPerShot: 10
+  energyPerShot: 30
   WeaponType: 2
-  Spread: 1
-  Damage: 110
+  Spread: 2
+  Damage: 70
   FireInterval: 1
+  numberOfProjectiles: 1
   AvatarImage: {fileID: 21300000, guid: caa4f5a45eb2fc74bae6f8c3cb95ca80, type: 3}
   MuzzleFlash: {fileID: 19804540, guid: 1c6bb34559f691b43ac387d2ddcba887, type: 3}
   BulletTracer: {fileID: 1140746222208220, guid: 05782b49a19b1884c8941d0ec812bf7e,
     type: 3}
-  Bullet: {fileID: 114195412413733438, guid: 9bd2d6d56c95b9c44912f3a23be8d996, type: 3}
+  Bullet: {fileID: 8432938459376562669, guid: 86343e381bfb75c43b4ab4efb8a6c149, type: 3}
   Ejector: {fileID: 4352212268131116}
 --- !u!1 &1809282711189154
 GameObject:

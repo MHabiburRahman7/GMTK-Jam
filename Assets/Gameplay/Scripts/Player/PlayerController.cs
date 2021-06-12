@@ -391,14 +391,21 @@ namespace TestGame.Player
 
         private void HandleDash(Vector3 dashDirection) {
             if (Input.GetButtonDown("Dash") && canDash) {
+                //spawn the particles before dashing so aprticles are spawn of the beginning point
                 Instantiate(dashParticles, transform.position, Quaternion.Euler(dashDirection));
                 dashPlayerParticles.Play();
+
+                //moves the player
                 this.m_Agent.Move(dashDirection * dashDistance);
+
+                //processes cooldown and disallows other dashes until it's up again
                 StartCoroutine("DashCooldown");
                 canDash = false;
             }
         }
 
+        //processes the cooldown of the dash
+        // waits for 2 seconds, then allows to dash again
         private IEnumerator DashCooldown() {
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
