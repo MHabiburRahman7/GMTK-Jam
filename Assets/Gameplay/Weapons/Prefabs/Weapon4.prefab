@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyPerShot: 10
-  WeaponType: 3
+  WeaponType: 2
   Spread: 1
   Damage: 110
   FireInterval: 1

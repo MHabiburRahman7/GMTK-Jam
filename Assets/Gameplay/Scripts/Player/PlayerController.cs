@@ -6,6 +6,7 @@ using TestGame.Bots;
 using TestGame.Weapons;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 namespace TestGame.Player
 {
@@ -79,10 +80,11 @@ namespace TestGame.Player
         //
         public float SprintSpeed = 7.0F;
 
-        //
-        // Dash distance
-        //
+        //distance of the dash in meters
         public float dashDistance = 2f;
+
+        //time between two uses of dash
+        public float dashCooldown = 2f;
 
         public ParticleSystem dashPlayerParticles; //player particles using energy to dash
 
@@ -97,6 +99,8 @@ namespace TestGame.Player
         // Look angle.
         //
         private float m_LookAngle = 0.0F;
+
+        private bool canDash = true;
         
         private bool m_IsRunning = false;
 
@@ -386,11 +390,18 @@ namespace TestGame.Player
         }
 
         private void HandleDash(Vector3 dashDirection) {
-            if (Input.GetButtonDown("Dash")) {
+            if (Input.GetButtonDown("Dash") && canDash) {
                 Instantiate(dashParticles, transform.position, Quaternion.Euler(dashDirection));
                 dashPlayerParticles.Play();
                 this.m_Agent.Move(dashDirection * dashDistance);
+                StartCoroutine("DashCooldown");
+                canDash = false;
             }
+        }
+
+        private IEnumerator DashCooldown() {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
         }
 
         private void RotateCamera(float deltaTime)

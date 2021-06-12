@@ -20,9 +20,9 @@ namespace TestGame.Weapons
     //
     public enum WeaponType
     {
-        Pistol,
-        Submachine,
         Assault,
+        Shotgun,
+        Explosive,
         Sniper,
     }
 
@@ -37,6 +37,7 @@ namespace TestGame.Weapons
         public float Spread;
         public float Damage;
         public float FireInterval;
+        public int numberOfProjectiles = 1;
 
         [Header("Weapon Avatar")]
         public Sprite AvatarImage;
@@ -51,31 +52,34 @@ namespace TestGame.Weapons
 
         public void SpawnAmmo(float spread)
         {
+            
             //
             // Spawn bullet and tracer
             //
             {
-                var projectile = Instantiate(this.Bullet, this.Ejector.transform.position, this.Ejector.transform.rotation);
-                var bullet = projectile.GetComponent<Bullet>();
+                for(int i = 0; i < numberOfProjectiles; i++) {
+                    var projectile = Instantiate(this.Bullet, this.Ejector.transform.position, this.Ejector.transform.rotation);
+                    var bullet = projectile.GetComponent<Bullet>();
 
-                var randomSpread = UnityEngine.Random.Range(-spread, spread);
+                    var randomSpread = UnityEngine.Random.Range(-spread, spread);
 
-                var debugbefore = projectile.transform.forward.normalized;
-                
-                projectile.transform.RotateAround(projectile.transform.position, Vector3.up, randomSpread);
+                    var debugbefore = projectile.transform.forward.normalized;
+                    
+                    projectile.transform.RotateAround(projectile.transform.position, Vector3.up, randomSpread);
 
-                //
-                // Initialize bullet.
-                //
-                bullet.Force = 1000.0F;
-                bullet.Damage = this.Damage;
+                    //
+                    // Initialize bullet.
+                    //
+                    bullet.Force = 1000.0F;
+                    bullet.Damage = this.Damage;
 
-                //
-                // And spawn tracer.
-                //
-                var tracer = Instantiate(this.BulletTracer, this.Ejector.transform.position, this.Ejector.transform.rotation);
-                tracer.transform.RotateAround(projectile.transform.position, Vector3.up, randomSpread);
-                bullet.Tracer = tracer;
+                    //
+                    // And spawn tracer.
+                    //
+                    var tracer = Instantiate(this.BulletTracer, this.Ejector.transform.position, this.Ejector.transform.rotation);
+                    tracer.transform.RotateAround(projectile.transform.position, Vector3.up, randomSpread);
+                    bullet.Tracer = tracer;
+                }
             }
 
             //

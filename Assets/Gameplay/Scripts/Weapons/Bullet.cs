@@ -58,6 +58,8 @@ namespace TestGame.Weapons
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.tag == "bullet") 
+                return;
             var character = collision.gameObject.GetComponent<CharacterBase>();
             if (character != null)
             {
