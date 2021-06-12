@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestGame.AI;
+using UnityEngine;
 
 namespace TestGame.Bots.Scorers
 {
     /// <summary>
     /// Fixed scorer. Just returns fixed score.
     /// </summary>
-    public class FixedScorer : AIScorer
+     [CreateAssetMenu(fileName ="FixedScorer.scorer.asset", menuName ="AI/Scorers/Fixed Scorer")]
+public class FixedScorer : AIScorer
     {
         //
         // Fixed score value.

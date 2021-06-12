@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestGame.AI;
+using UnityEngine;
 
 namespace TestGame.Bots.Scorers
 {
     /// <summary>
     /// This scorer determines whether bot has weapon.
     /// </summary>
+     [CreateAssetMenu(fileName ="HasWeapon.scorer.asset", menuName ="AI/Scorers/Has Weapon")]
     public sealed class HasWeapon : AIScorer
     {
         /// <summary>

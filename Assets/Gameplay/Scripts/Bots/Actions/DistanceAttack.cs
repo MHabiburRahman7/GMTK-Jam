@@ -10,6 +10,7 @@ namespace TestGame.Bots.Actions
     /// <summary>
     /// Distance attack. Bot tries to maintain distance and uses weapon to shoot down target.
     /// </summary>
+    [CreateAssetMenu(fileName ="DistanceAttack.action.asset", menuName ="AI/Actions/Distance Attack")]
     public sealed class DistanceAttack : KeepDistance
     {
         //

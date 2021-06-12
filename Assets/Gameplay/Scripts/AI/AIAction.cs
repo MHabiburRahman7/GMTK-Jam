@@ -9,7 +9,8 @@ namespace TestGame.AI
     /// <summary>
     /// Represents base AI action.
     /// </summary>
-    public abstract class AIAction
+    [Serializable]
+    public abstract class AIAction : ScriptableObject
     {
         public AIScorer[] Scorers;
 

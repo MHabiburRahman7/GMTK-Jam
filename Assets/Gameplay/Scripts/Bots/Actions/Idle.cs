@@ -10,6 +10,8 @@ namespace TestGame.Bots.Actions
     /// <summary>
     /// Idle action. Bot just wanders around map.
     /// </summary>
+    [CreateAssetMenu(fileName ="Idle.action.asset", menuName ="AI/Actions/Idle")]
+
     public class Idle : AIAction
     {
         public override void Execute(IAIContext context)

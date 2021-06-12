@@ -11,6 +11,8 @@ namespace TestGame.Bots.Actions
     /// <summary>
     /// Bot tries to perform melee attack on target.
     /// </summary>
+    [CreateAssetMenu(fileName ="MeleeAttack.action.asset", menuName ="AI/Actions/Melee Attack")]
+
     public sealed class MeleeAttack : AIAction
     {
         public override void Execute(IAIContext context)

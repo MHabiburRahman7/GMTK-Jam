@@ -18,7 +18,7 @@ namespace TestGame.AI
         //
         // Actual evaluation timeout.
         //
-        private float m_EvaluationTimeout = 0.0F;
+        public float m_EvaluationTimeout = 0.0F;
 
         /// <summary>
         /// Evaluation interval.
@@ -55,7 +55,7 @@ namespace TestGame.AI
         /// Initializes agent AI actions.
         /// </summary>
         /// <param name="actions">An array of actions.</param>
-        protected void InitializeAgent(AIAction[] actions)
+        protected void SetActions(AIAction[] actions)
         {
             this.m_Actions = actions;
         }
@@ -188,8 +188,13 @@ namespace TestGame.AI
             if (this.m_CurrentAction != null && this.m_CurrentActionEvaluationTimeout <= 0.0F)
             {
                 this.m_CurrentActionEvaluationTimeout = this.m_CurrentAction.Interval;
+                IAIContext context=this.ProvideContext();
+                this.m_CurrentAction.Execute(context);
 
-                this.m_CurrentAction.Execute(this.ProvideContext());
+                for (int i = 0; i < this.m_CurrentAction.Scorers.Length; ++i)
+                {
+                    this.m_CurrentAction.Scorers[i].OnAction(context);
+                }
             }
         }
     }

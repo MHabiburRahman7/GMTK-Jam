@@ -10,6 +10,7 @@ namespace TestGame.Bots.Scorers
     /// <summary>
     /// This scorer evaluates whether agent sees its target.
     /// </summary>
+     [CreateAssetMenu(fileName ="TargetInSight.scorer.asset", menuName ="AI/Scorers/Target In Sight")]
     public class TargetInSight : AIScorer
     {
         /// <summary>
