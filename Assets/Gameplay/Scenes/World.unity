@@ -10665,8 +10665,8 @@ MonoBehaviour:
   Player: {fileID: 365629683}
   PlayerController: {fileID: 365629682}
   GameController: {fileID: 667789508}
-  EnergyBar: {fileID: 0}
-  EnergyValue: {fileID: 0}
+  EnergyBar: {fileID: 744334004}
+  EnergyValue: {fileID: 2139342207}
   WeaponImage: {fileID: 2094280162}
   WeaponClipAmmo: {fileID: 1592235243}
   WeaponTotalAmmo: {fileID: 608521721}
