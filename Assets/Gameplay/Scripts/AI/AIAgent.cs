@@ -59,7 +59,12 @@ namespace TestGame.AI
         {
             this.m_Actions = actions;
         }
-        
+
+        public void DisableAI()
+        {
+            this.m_Actions = null;
+            this.m_CurrentAction = null;
+        }
         /// <summary>
         /// Provies context of action evaluation for this agent.
         /// </summary>

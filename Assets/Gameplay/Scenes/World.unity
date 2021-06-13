@@ -11202,10 +11202,6 @@ MonoBehaviour:
   - {fileID: 793558751}
   BotPrefabs:
   - {fileID: 1475901519609956, guid: d8c3f4395c316ac4fab5ecb8a6e027e3, type: 3}
-  - {fileID: 1475901519609956, guid: c953568fd3022884486959f56f1c7fc0, type: 3}
-  - {fileID: 6377399004590784155, guid: 3864d01fea688b344bbcac72cebc6c09, type: 3}
-  - {fileID: 5395008424293832843, guid: ef13f34fcb0f33d4e84c302fdbae406f, type: 3}
-  - {fileID: 7888121162452719254, guid: 67a725dbe4228ee40b336fd831ab7499, type: 3}
   Bots: {fileID: 1374088744}
   Wave: 1
   Enemies: 50

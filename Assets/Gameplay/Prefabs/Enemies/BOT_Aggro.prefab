@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 136738116699937624}
   - component: {fileID: 114179114461924724}
   - component: {fileID: 114138893991024112}
+  - component: {fileID: 4770955616725842563}
   m_Layer: 0
   m_Name: BOT_Aggro
   m_TagString: Enemy
@@ -183,6 +184,24 @@ MonoBehaviour:
   Controller: {fileID: 0}
   MeleeAttackTimer: 0
   HitAndRunTimer: 0
-  Cd_CurrentDuration: 0
-  Cd_lastTime: 0
+  Cd_CurrentDuration: []
+  Cd_lastTime: []
   isCharging: 0
+--- !u!114 &4770955616725842563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475901519609956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff474ffaec754b4188c7c0bcf27d57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delay: 2
+  range: 5
+  damage: 500
+  smoke: {fileID: 5509007702566181165, guid: 979fea08db0e5874cbb97a249c6dc28d, type: 3}
+  explosion: {fileID: 3824329722088178544, guid: 97f27f27e2f468c40a72c79dfe298140,
+    type: 3}
