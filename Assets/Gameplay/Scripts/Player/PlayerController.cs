@@ -55,7 +55,7 @@ namespace TestGame.Player
         //
         // Player weapon slots.
         //
-        public Weapon[] WeaponSlots;
+        public List<Weapon> WeaponSlots = new List<Weapon>();
 
         //
         // Socket to where attach weapon on player pawn.
@@ -165,7 +165,7 @@ namespace TestGame.Player
             //
             // XXX: Instantiate all prefabs in weapon slots to actual objects.
             //
-            for (var i = 0; i < this.WeaponSlots.Length; ++i)
+            for (var i = 0; i < this.WeaponSlots.Count; ++i)
             {
                 this.WeaponSlots[i] = (Weapon)Instantiate(this.WeaponSlots[i]);
                 this.WeaponSlots[i].gameObject.SetActive(false);
@@ -533,7 +533,7 @@ namespace TestGame.Player
             //
             // Iterate over all sockets.
             //
-            for (int i = 0; i < this.WeaponSlots.Length; ++i)
+            for (int i = 0; i < this.WeaponSlots.Count; ++i)
             {
                 //
                 // Check if we have this kind of weapon.
@@ -555,7 +555,7 @@ namespace TestGame.Player
             // Select next weapon index.
             //
             this.m_CurrentWeaponIndex += 1;
-            this.m_CurrentWeaponIndex %= this.WeaponSlots.Length;
+            this.m_CurrentWeaponIndex %= this.WeaponSlots.Count;
 
             //
             // And switch to it.
@@ -565,22 +565,24 @@ namespace TestGame.Player
 
         public void SelectPrevWeapon()
         {
-            //
-            // Select next weapon index.
-            //
-            this.m_CurrentWeaponIndex += this.WeaponSlots.Length;
-            this.m_CurrentWeaponIndex -= 1;
-            this.m_CurrentWeaponIndex %= this.WeaponSlots.Length;
+            if (WeaponSlots.Count > 0) {
+                //
+                // Select next weapon index.
+                //
+                this.m_CurrentWeaponIndex += this.WeaponSlots.Count;
+                this.m_CurrentWeaponIndex -= 1;
+                this.m_CurrentWeaponIndex %= this.WeaponSlots.Count;
 
-            //
-            // And switch to it.
-            //
-            this.SelectWeapon(this.m_CurrentWeaponIndex);
+                //
+                // And switch to it.
+                //
+                this.SelectWeapon(this.m_CurrentWeaponIndex);
+            }
         }
 
         private void SelectWeapon(int index)
         {
-            if (0 <= index && index < this.WeaponSlots.Length)
+            if (0 <= index && index < this.WeaponSlots.Count)
             {
                 this.m_CurrentWeaponIndex = index;
 
@@ -596,7 +598,7 @@ namespace TestGame.Player
                 //
                 // And pin selected weapon to socket.
                 //
-                var selected = this.WeaponSlots[this.m_CurrentWeaponIndex];
+                var selected = Instantiate(this.WeaponSlots[this.m_CurrentWeaponIndex]);
                 selected.gameObject.SetActive(true);
                 selected.transform.parent = this.WeaponSocket.transform;
                 selected.transform.localPosition = Vector3.zero;
@@ -613,7 +615,8 @@ namespace TestGame.Player
                 //
                 // Shoot.
                 //
-                this.CurrentWeapon.Shoot();
+                if (this.CurrentWeapon.Shoot())
+                    this.Character.Energy -= CurrentWeapon.energyPerShot;
             }
         }
 

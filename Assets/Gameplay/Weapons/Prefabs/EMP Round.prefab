@@ -77,13 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dfa7d0ba8590241bb7785ff82bdd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 0
   Force: 0
   explosionRadius: 3
   isEMP: 1
   EMPPrefab: {fileID: 8992252762917044040, guid: 4d60dfd26b81ef249bb9f306bec02afc,
     type: 3}
-  Tracer: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  Tracer: {fileID: 1140746222208220, guid: 05782b49a19b1884c8941d0ec812bf7e, type: 3}
 --- !u!122 &56594106897452664
 Halo:
   m_ObjectHideFlags: 0
@@ -94,7 +95,7 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4281846243
+    rgba: 4294832661
   m_Size: 0.2
 --- !u!96 &12388407545700200
 TrailRenderer:

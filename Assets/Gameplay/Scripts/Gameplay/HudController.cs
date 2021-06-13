@@ -135,7 +135,8 @@ namespace TestGame.Gameplay
                 this.UpdateHealth(this.Player);
             }
 
-            this.UpdateWeapon(this.PlayerController.CurrentWeapon);
+            if (this.PlayerController.CurrentWeapon != null)
+                this.UpdateWeapon(this.PlayerController.CurrentWeapon);
 
             if (this.m_UpdateWave)
             {
