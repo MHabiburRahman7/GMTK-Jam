@@ -571,7 +571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &387442453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2079,7 +2079,10 @@ MonoBehaviour:
     2 Attach yourself
     to closest enemies to gain energy
 
-    3 Stay alive and kill other enemies'
+    3 Shooting will consume your energy
+
+    4
+    Stay alive and kill other enemies'
 --- !u!222 &1329899472
 CanvasRenderer:
   m_ObjectHideFlags: 0

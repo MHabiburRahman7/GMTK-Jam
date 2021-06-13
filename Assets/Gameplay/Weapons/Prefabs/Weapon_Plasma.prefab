@@ -101,7 +101,8 @@ MonoBehaviour:
   Damage: 70
   FireInterval: 1
   numberOfProjectiles: 1
-  AvatarImage: {fileID: 21300000, guid: caa4f5a45eb2fc74bae6f8c3cb95ca80, type: 3}
+  AvatarImage: {fileID: -4328273562849172146, guid: 9797edd5684c3c4448d4af35d67118bd,
+    type: 3}
   MuzzleFlash: {fileID: 6700977963148650463, guid: bd3b461827ae1c343982fafca966339d,
     type: 3}
   BulletTracer: {fileID: 1140746222208220, guid: 05782b49a19b1884c8941d0ec812bf7e,
