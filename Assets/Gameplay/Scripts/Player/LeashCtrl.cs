@@ -211,6 +211,7 @@ namespace TestGame.Player
             else
             {
                 //GAME OVER
+                Debug.Log(this.gameObject.name);
                 m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime);
             }
         }
@@ -252,14 +253,11 @@ namespace TestGame.Player
         public void CheckWeaponUnlock() {
             Bots.BotCharacter bot = fetchedEnemy.GetComponent<Bots.BotCharacter>();
             if (bot != null && bot.Weapon != null) {
-                Debug.Log("call");
                 foreach(Weapons.Weapon weapon in m_playerChar.Controller.WeaponSlots) {
                     if (weapon.name == bot.Weapon.name){
-                        Debug.Log("already equipped: " + bot.Weapon.name);
                         return;
                     }
                 }
-                Debug.Log(bot.Weapon.AvatarImage.name);
                 m_playerChar.Controller.WeaponSlots.Add(bot.Weapon);
             }
         }

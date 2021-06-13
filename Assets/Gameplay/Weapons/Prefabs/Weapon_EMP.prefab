@@ -128,7 +128,7 @@ MonoBehaviour:
   energyPerShot: 30
   WeaponType: 2
   Spread: 2
-  Damage: 70
+  Damage: 0
   FireInterval: 1
   numberOfProjectiles: 1
   AvatarImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
