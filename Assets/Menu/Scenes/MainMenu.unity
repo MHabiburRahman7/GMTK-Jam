@@ -184,7 +184,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5d0d04d0aad3f864f9ade925233e3799, type: 3}
     m_FontSize: 36
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
@@ -2079,7 +2079,10 @@ MonoBehaviour:
     2 Attach yourself
     to closest enemies to gain energy
 
-    3 Stay alive and kill other enemies'
+    3 Shooting will consume your energy
+
+    4
+    Stay alive and kill other enemies'
 --- !u!222 &1329899472
 CanvasRenderer:
   m_ObjectHideFlags: 0

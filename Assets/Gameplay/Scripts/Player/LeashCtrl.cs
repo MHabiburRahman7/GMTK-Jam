@@ -25,8 +25,11 @@ namespace TestGame.Player
         public GameObject[] EnemyList;
         public PlayerCharacter m_playerChar;
         public Bots.BotCharacter m_botChar;
+        public AudioClip chargingSound;
 
         public float countDown;
+
+        private AudioSource source;
 
         //public RopeJointController m_ropeJointController;
         //public RopeControllerSimple m_ropeControllerSimple;
@@ -38,6 +41,8 @@ namespace TestGame.Player
             line.positionCount = 0;
             line.useWorldSpace = false;
             m_playerChar = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerCharacter>();
+            source = GetComponent<AudioSource>();
+            source.clip = chargingSound;
         }
 
         // Update is called once per frame
@@ -55,8 +60,10 @@ namespace TestGame.Player
                 {
                     nextFetchedEnemy = null;
                     CreatePoints();
+                    //play the charging sound
+                    source.Play();
                     CheckWeaponUnlock();
-                    AdjustThePlayer(true, true);
+                    AdjustThePlayer(false, true);
                 }
                 else if (Input.GetMouseButtonUp(1))
                 {
@@ -198,7 +205,7 @@ namespace TestGame.Player
 
             if (change)
             {
-                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 1)
+                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 0)
                     fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
                 change = false;
             }
@@ -232,8 +239,7 @@ namespace TestGame.Player
             else
             {
                 //GAME OVER
-                Debug.Log(this.gameObject.name);
-                m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime);
+                m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime, true);
             }
         }
 
@@ -260,6 +266,8 @@ namespace TestGame.Player
         }
 
         public void CheckWeaponUnlock() {
+            if(!fetchedEnemy)
+                return;
             Bots.BotCharacter bot = fetchedEnemy.GetComponent<Bots.BotCharacter>();
             if (bot != null && bot.Weapon != null) {
                 foreach(Weapons.Weapon weapon in m_playerChar.Controller.WeaponSlots) {
