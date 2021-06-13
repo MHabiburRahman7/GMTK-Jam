@@ -24,21 +24,29 @@ namespace TestGame.Bots.Scorers
         /// </summary>
         public float NegativeScore;
 
-        private float CurrentDuration=0;
+       // public float CurrentDuration=0;
+       // public float lastTime = 0;
         public override float Score(IAIContext context)
         {
-            if(CurrentDuration>0){
-                CurrentDuration-= Time.deltaTime;
-            return NegativeScore;
+
+            var bot = context as BotCharacter;
+
+            if (bot.Cd_CurrentDuration>0){
+                bot.Cd_CurrentDuration -= Time.time- bot.Cd_lastTime;
+                bot.Cd_lastTime = Time.time;
+                return NegativeScore;
             }
             else{
-                CurrentDuration=0;
+                bot.Cd_CurrentDuration = 0;
                 return PositiveScore;
             }
         }
 
         public override void OnAction(IAIContext context){
-            CurrentDuration=Duration;
+
+            var bot = context as BotCharacter;
+            bot.Cd_CurrentDuration = Duration;
+            bot.Cd_lastTime = Time.time;
         }
 
     }

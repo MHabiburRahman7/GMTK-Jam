@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 114179114461924724}
   - component: {fileID: 114138893991024112}
   m_Layer: 0
-  m_Name: AggroBot
-  m_TagString: Enemy
+  m_Name: Canon_Bot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1475901519609956}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -152,8 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EvaluationTimeout: 0
   EvaluationInterval: 0.333
-  regular_controller: {fileID: 11400000, guid: 2f05bb2813813824480c0b8d5052316e, type: 2}
-  tethered_controller: {fileID: 11400000, guid: 2f05bb2813813824480c0b8d5052316e,
+  regular_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879, type: 2}
+  tethered_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879,
     type: 2}
   current_controller: {fileID: 0}
   NavMeshAgent: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
   IsAlive: 1
   Speed: 10
   MeleeAttack: 2
-  MeleeAttackRange: 4
+  MeleeAttackRange: 2
   MeleeAttackInterval: 1
   MeleeHitAndRun: 1
   Weapon: {fileID: 0}

@@ -15,7 +15,7 @@ namespace TestGame.Bots.Actions
 
     public sealed class MeleeAttack : AIAction
     {
-        public override void Execute(IAIContext context)
+        public override bool Execute(IAIContext context)
         {
             //
             // Extract bot character.
@@ -68,6 +68,7 @@ namespace TestGame.Bots.Actions
             //
             agent.SetDestination(targetPosition);
             agent.isStopped = false;
+            return true;
         }
     }
 }

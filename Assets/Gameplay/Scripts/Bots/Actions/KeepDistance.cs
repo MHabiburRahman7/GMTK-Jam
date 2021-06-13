@@ -16,7 +16,7 @@ namespace TestGame.Bots.Actions
     {
         public int PathEvaluationLimit = 10;
 
-        public override void Execute(IAIContext context)
+        public override bool Execute(IAIContext context)
         {
             //
             // Extract bot character.
@@ -79,6 +79,7 @@ namespace TestGame.Bots.Actions
             }
 
             ++bot.Controller.PathEvaluationCounter;
+            return true;
         }
     }
 }

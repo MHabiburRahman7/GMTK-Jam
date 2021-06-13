@@ -11,11 +11,11 @@ namespace TestGame.Bots.Actions
     /// <summary>
     /// Bot tries to perform melee attack on target.
     /// </summary>
-    [CreateAssetMenu(fileName ="Charge.action.asset", menuName ="AI/Actions/Charge")]
+    [CreateAssetMenu(fileName = "Charge.action.asset", menuName = "AI/Actions/Charge")]
 
     public sealed class Charge : AIAction
     {
-        public float Duration= 2F;
+        public float Duration = 2F;
         //
         // Min angle to shoot.
         //
@@ -25,60 +25,68 @@ namespace TestGame.Bots.Actions
         // Max rotation angle.
         //
         public float RotationAngle = 90.0F;
-        public override void Execute(IAIContext context)
+
+        public Vector3 targetPosition;
+        public override bool Execute(IAIContext context)
         {
             //
             // Extract bot character.
             //
             var bot = context as BotCharacter;
 
-            //
-            // Get target position.
-            //
-            var targetPosition = bot.Target.position;
-            
+            Debug.DrawRay(bot.transform.position, bot.transform.forward * 10, Color.red);
+
+
             var agent = bot.Controller.NavMeshAgent;
 
-            if(!bot.isCharging){
-            //
-            //
-            //
-            var lookDirection = Vector3.Normalize(targetPosition - bot.transform.position);
-
-            //
-            // Zero out UP direction.
-            //
-            lookDirection.y = 0.0F;
-
-            
-            //
-            // Rotate bot towards target.
-            //
-            var lookAtTarget = Quaternion.LookRotation(lookDirection);
-            bot.transform.rotation = Quaternion.RotateTowards(bot.transform.rotation, lookAtTarget, this.RotationAngle * this.Interval);
-
-            //
-            // Compute angle between target and forward.
-            //
-            var angleBetween = Vector3.Angle(lookDirection, bot.transform.forward);
-            
-            if (angleBetween <= this.MinAngle)
-            {
+            if (!bot.isCharging)
+            {            
                 //
-                // Shoot if target is in range.
+                // Get target position.
                 //
-                
-                bot.isCharging=true;
-                agent.speed=bot.Speed*3;
-                bot.Controller.m_EvaluationTimeout=Duration;
+                targetPosition = bot.Target.position;
+                //
+                //
+                //
+                var lookDirection = Vector3.Normalize(targetPosition - bot.transform.position);
+
+                //
+                // Zero out UP direction.
+                //
+                lookDirection.y = 0.0F;
+
+
+                //
+                // Rotate bot towards target.
+                //
+                var lookAtTarget = Quaternion.LookRotation(lookDirection);
+                bot.transform.rotation = Quaternion.RotateTowards(bot.transform.rotation, lookAtTarget, this.RotationAngle * this.Interval);
+
+                //
+                // Compute angle between target and forward.
+                //
+                var angleBetween = Vector3.Angle(lookDirection, bot.transform.forward);
+
+                if (angleBetween <= this.MinAngle)
+                {
+                    //
+                    // Shoot if target is in range.
+                    //
+
+                    bot.isCharging = true;
+                    agent.speed = bot.Speed * 3;
+                    bot.Controller.m_EvaluationTimeout = Duration;
+                }
+                return false;
             }
-            }else{
-                
+            else
+            {
+
 
                 agent.autoBraking = false;
 
                 var botPosition = bot.transform.position;
-                var distance = Vector3.Distance(targetPosition, botPosition);
+                var distance = Vector3.Distance(bot.Target.position, botPosition);
                 var inRange = distance < bot.MeleeAttackRange;
 
                 //
@@ -98,22 +106,23 @@ namespace TestGame.Bots.Actions
                     //
                     var player = bot.Target.gameObject.GetComponent<CharacterBase>();
                     bot.MeleeAttackTimer = -bot.MeleeAttackInterval;
-                    
-                    bot.Controller.m_EvaluationTimeout=-1;
-                    
-                    agent.speed=bot.Speed;
+
+                    bot.Controller.m_EvaluationTimeout = -1;
+
+                    agent.speed = bot.Speed;
                     //
                     // Reset hit-and-run.
                     //
                     bot.HitAndRunTimer = 0.0F;
 
                     player.TakeDamage(bot.MeleeAttack);
+                    bot.isCharging = false;
                 }
+                return true;
             }
-            Debug.DrawRay(bot.transform.position, bot.transform.forward * 10, Color.red);
         }
-    
-    public override void OnEnter(IAIContext context)
+
+        public override void OnEnter(IAIContext context)
         {
             base.OnEnter(context);
 
@@ -140,6 +149,10 @@ namespace TestGame.Bots.Actions
             // Leave rotation update to navmesh agent.
             //
             bot.Controller.NavMeshAgent.updateRotation = true;
+            bot.isCharging = false;
+
+            var agent = bot.Controller.NavMeshAgent;
+            agent.speed = bot.Speed;
         }
     }
 }

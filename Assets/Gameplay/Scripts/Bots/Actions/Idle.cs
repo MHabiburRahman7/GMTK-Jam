@@ -14,7 +14,7 @@ namespace TestGame.Bots.Actions
 
     public class Idle : AIAction
     {
-        public override void Execute(IAIContext context)
+        public override bool Execute(IAIContext context)
         {
             var bot = context as BotCharacter;
 
@@ -38,6 +38,7 @@ namespace TestGame.Bots.Actions
             var agent = bot.Controller.NavMeshAgent;
             agent.SetDestination(destination);
             agent.isStopped = false;
+            return true;
         }
     }
 }

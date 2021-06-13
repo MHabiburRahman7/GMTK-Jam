@@ -189,11 +189,13 @@ namespace TestGame.AI
             {
                 this.m_CurrentActionEvaluationTimeout = this.m_CurrentAction.Interval;
                 IAIContext context=this.ProvideContext();
-                this.m_CurrentAction.Execute(context);
-
-                for (int i = 0; i < this.m_CurrentAction.Scorers.Length; ++i)
+                if (this.m_CurrentAction.Execute(context))
                 {
-                    this.m_CurrentAction.Scorers[i].OnAction(context);
+
+                    for (int i = 0; i < this.m_CurrentAction.Scorers.Length; ++i)
+                    {
+                        this.m_CurrentAction.Scorers[i].OnAction(context);
+                    }
                 }
             }
         }

@@ -52,7 +52,7 @@ namespace TestGame.Bots.Actions
             bot.Controller.NavMeshAgent.updateRotation = true;
         }
 
-        public override void Execute(IAIContext context)
+        public override bool Execute(IAIContext context)
         {
             base.Execute(context);
 
@@ -97,6 +97,7 @@ namespace TestGame.Bots.Actions
             }
             
             Debug.DrawRay(bot.transform.position, bot.transform.forward * 10, Color.green);
+            return true;
         }
     }
 }

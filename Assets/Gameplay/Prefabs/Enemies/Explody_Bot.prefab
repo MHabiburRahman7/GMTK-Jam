@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 114179114461924724}
   - component: {fileID: 114138893991024112}
   m_Layer: 0
-  m_Name: Body_Bot1
-  m_TagString: Untagged
+  m_Name: Explody_Bot
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,8 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EvaluationTimeout: 0
   EvaluationInterval: 0.333
-  regular_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879, type: 2}
-  tethered_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879,
+  regular_controller: {fileID: 11400000, guid: 2f05bb2813813824480c0b8d5052316e, type: 2}
+  tethered_controller: {fileID: 11400000, guid: 2f05bb2813813824480c0b8d5052316e,
     type: 2}
   current_controller: {fileID: 0}
   NavMeshAgent: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
   IsAlive: 1
   Speed: 10
   MeleeAttack: 2
-  MeleeAttackRange: 2
+  MeleeAttackRange: 4
   MeleeAttackInterval: 1
   MeleeHitAndRun: 1
   Weapon: {fileID: 0}
@@ -187,4 +187,6 @@ MonoBehaviour:
   Controller: {fileID: 0}
   MeleeAttackTimer: 0
   HitAndRunTimer: 0
+  Cd_CurrentDuration: 0
+  Cd_lastTime: 0
   isCharging: 0

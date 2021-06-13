@@ -46,7 +46,8 @@ namespace TestGame.AI
         /// Executes action for context.
         /// </summary>
         /// <param name="context">A context.</param>
-        public abstract void Execute(IAIContext context);
+        /// <returns>true if scorer.OnAction should be executed</returns>
+        public abstract bool Execute(IAIContext context);
 
         /// <summary>
         /// Called when AI enters this action.

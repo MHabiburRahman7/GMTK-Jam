@@ -42,6 +42,9 @@ namespace TestGame.Bots
         public BotController Controller;
         public float MeleeAttackTimer = 0.0F;
         public float HitAndRunTimer = 0.0F;
+        public float Cd_CurrentDuration = 0.0F;
+        public float Cd_lastTime = 0.0F;
+
 
         private void Awake()
         {

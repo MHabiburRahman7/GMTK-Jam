@@ -14,7 +14,7 @@ namespace TestGame.Bots.Actions
 
     public class MoveToPlayer : AIAction
     {
-        public override void Execute(IAIContext context)
+        public override bool Execute(IAIContext context)
         {
             var bot = context as BotCharacter;
 
@@ -30,7 +30,8 @@ namespace TestGame.Bots.Actions
             //
             agent.SetDestination(targetPosition);
             agent.autoBraking = true;
-            agent.isStopped = false;
+            agent.isStopped = false; 
+            return true;
         }
     }
 }
