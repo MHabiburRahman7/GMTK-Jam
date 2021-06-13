@@ -232,8 +232,7 @@ namespace TestGame.Player
             else
             {
                 //GAME OVER
-                Debug.Log(this.gameObject.name);
-                m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime);
+                m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime, true);
             }
         }
 

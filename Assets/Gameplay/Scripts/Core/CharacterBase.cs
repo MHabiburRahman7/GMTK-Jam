@@ -17,7 +17,7 @@ namespace TestGame.Core
 
         public bool IsAlive = true;
 
-        public virtual void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage, bool ignoreSound = false)
         {
             if (this.IsAlive)
             {
