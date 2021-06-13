@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2021 by Ordo Fabricators
+  m_Text: 2021 - Ordo Fabricators
 --- !u!222 &57796842
 CanvasRenderer:
   m_ObjectHideFlags: 0
