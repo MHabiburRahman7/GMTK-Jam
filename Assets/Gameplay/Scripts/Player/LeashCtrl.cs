@@ -20,12 +20,13 @@ namespace TestGame.Player
         [Range(0, 10)]
         public float p_healtIncrease, p_healthDecrease, e_healthIncrease, e_healthDecrease;
 
-
         public GameObject fetchedEnemy, nextFetchedEnemy;
 
         public GameObject[] EnemyList;
         public PlayerCharacter m_playerChar;
         public Bots.BotCharacter m_botChar;
+
+        public float countDown;
 
         //public RopeJointController m_ropeJointController;
         //public RopeControllerSimple m_ropeControllerSimple;
@@ -42,51 +43,59 @@ namespace TestGame.Player
         // Update is called once per frame
         void Update()
         {
-            //
-            //If the rope is released
-            //
-            if (Input.GetMouseButton(1))
+            if(countDown < 0)
             {
-                nextFetchedEnemy = null;
-                //Debug.Log("leash released");
-                CreatePoints();
-            }
-            else if (Input.GetMouseButtonUp(1))
-            {
-                if (EnemyFetched())
-                {
-                    AdjustThePlayer(true, true);
-                }
-                else
-                {
-                    AdjustThePlayer(false, true);
-                }
-            }
+                //Find all enemies
+                GetEnemies();
 
-            //Regenerate because it is fetched
-            if (fetchedEnemy != null)
-            {
-                if (IsStillInsideTheRange())
+                //
+                //If the rope is released
+                //
+                if (Input.GetMouseButton(1))
                 {
-                    DrawRope();
-                    AdjustThePlayer(true, false);
+                    nextFetchedEnemy = null;
+                    //Debug.Log("leash released");
+                    CreatePoints();
                 }
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    if (EnemyFetched())
+                    {
+                        AdjustThePlayer(true, true);
+                    }
+                    else
+                    {
+                        AdjustThePlayer(false, true);
+                    }
+                }
+
+                //Regenerate because it is fetched
+                if (fetchedEnemy != null)
+                {
+                    if (IsStillInsideTheRange())
+                    {
+                        DrawRope();
+                        AdjustThePlayer(true, false);
+                    }
+                    else
+                    {
+                        AdjustThePlayer(false, true);
+                        deleteLine();
+                    }
+                }
+                //Degenerate becasue it is not fetched
                 else
                 {
-                    AdjustThePlayer(false, true);
-                    deleteLine();
+                    ////Debug.Log("Degenerate !!!");
+                    AdjustThePlayer(false, false);
                 }
+
+                //Debug.Log("line world bool: " + line.useWorldSpace);
             }
-            //Degenerate becasue it is not fetched
             else
             {
-                ////Debug.Log("Degenerate !!!");
-                AdjustThePlayer(false, false);
+                countDown -= Time.deltaTime;
             }
-
-            GetEnemies();
-
-            //Debug.Log("line world bool: " + line.useWorldSpace);
         }
 
         void CreatePoints()
@@ -136,10 +145,15 @@ namespace TestGame.Player
                 mousePos = ray.GetPoint(distance);
             }
 
+            //If there are no enemies
+            if (EnemyList.Length == 0)
+                return false;
+
             //get 3 closest characters (to referencePos)
             var nClosest = EnemyList.OrderBy(t => (t.transform.position - mousePos).sqrMagnitude)
                                        .FirstOrDefault();
 
+            Debug.Log("Fetching Enemy");
             //if the fetched enemy is ded enemy
             if (nClosest.gameObject.GetComponent<Bots.BotCharacter>().Energy < 1)
                 return false;
@@ -151,9 +165,9 @@ namespace TestGame.Player
                 nextFetchedEnemy = fetchedEnemy;
 
                 //Debug.Log("distance: " + (transform.position - fetchedEnemy.transform.position).sqrMagnitude);
-               // Debug.Log("the mouse input: " + mousePos);
+                //Debug.Log("the mouse input: " + mousePos);
                 line.useWorldSpace = true;
-
+                Debug.Log("Fetched bot: " + nClosest.gameObject.name);
                 //m_ropeJointController.StartInit(gameObject, fetchedEnemy.gameObject);
                 //InitRopeJoint();
 
@@ -173,6 +187,13 @@ namespace TestGame.Player
 
         public void AdjustThePlayer(bool isAttached, bool change) 
         {
+
+            //If there are no enemies
+            if (EnemyList.Length == 0)
+            {
+                deleteLine();
+                //return;
+            }
 
             if (change)
             {
@@ -223,18 +244,6 @@ namespace TestGame.Player
             line.SetPosition(0, transform.position);
             line.SetPosition(1, fetchedEnemy.transform.position);
         }
-
-        //public void InitRopeJoint()
-        //{
-        //    m_ropeControllerSimple.whatTheRopeIsConnectedTo = m_playerChar.gameObject.transform;
-        //    m_ropeControllerSimple.whatIsHangingFromTheRope = fetchedEnemy.gameObject.transform;
-        //}
-
-        //public void DestroyRopeJoint()
-        //{
-        //    m_ropeControllerSimple.whatTheRopeIsConnectedTo = null;
-        //    m_ropeControllerSimple.whatIsHangingFromTheRope = null;
-        //}
 
         public bool IsStillInsideTheRange()
         {

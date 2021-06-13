@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2017 by Karol Grzybowski
+  m_Text: 2021 by Ordo Fabricators
 --- !u!222 &57796842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -988,7 +988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &498366617
 RectTransform:
   m_ObjectHideFlags: 0
