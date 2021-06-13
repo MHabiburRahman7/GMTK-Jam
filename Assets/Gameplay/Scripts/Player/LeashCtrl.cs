@@ -80,7 +80,7 @@ namespace TestGame.Player
             //Degenerate becasue it is not fetched
             else
             {
-                Debug.Log("Degenerate !!!");
+                ////Debug.Log("Degenerate !!!");
                 AdjustThePlayer(false, false);
             }
 
