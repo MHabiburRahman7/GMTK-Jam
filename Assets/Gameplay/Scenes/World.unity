@@ -6434,7 +6434,6 @@ GameObject:
   - component: {fileID: 365629685}
   - component: {fileID: 365629686}
   - component: {fileID: 365629688}
-  - component: {fileID: 365629687}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6475,12 +6474,7 @@ MonoBehaviour:
   LaserPointer: {fileID: 631410066}
   Character: {fileID: 0}
   CurrentWeapon: {fileID: 0}
-  WeaponSlots:
-  - {fileID: 114990966519441556, guid: 506c5dd11b11f8344b18386c64345d35, type: 3}
-  - {fileID: 114953865434013066, guid: 07ecd541699cc4b4887a4a1ac325f575, type: 3}
-  - {fileID: 114409117791835092, guid: ef0a4663189e4a6409d864aa7264c775, type: 3}
-  - {fileID: 114135403151523164, guid: 63a4134695c5b934495a99306d93a17a, type: 3}
-  - {fileID: 511731813410127540, guid: 35ffe1ce82b70d149ae202522c406c3a, type: 3}
+  WeaponSlots: []
   WeaponSocket: {fileID: 4126875}
   RotationAngularSpeed: 720
   CameraAngularSpeed: 135
@@ -6559,29 +6553,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &365629687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365629680}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0afb1b791c90856458bafe7ae980753a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  segments: 50
-  minRange: 0
-  p_healtIncrease: 2
-  p_healthDecrease: 0
-  e_healthIncrease: 0
-  e_healthDecrease: 2
-  fetchedEnemy: {fileID: 0}
-  nextFetchedEnemy: {fileID: 0}
-  EnemyList: []
-  m_playerChar: {fileID: 365629683}
-  m_botChar: {fileID: 0}
 --- !u!120 &365629688
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7831,10 +7802,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segments: 50
   minRange: 10
-  p_healtIncrease: 2
-  p_healthDecrease: 2
+  p_healtIncrease: 10
+  p_healthDecrease: 1
   e_healthIncrease: 0
-  e_healthDecrease: 2
+  e_healthDecrease: 10
   fetchedEnemy: {fileID: 0}
   nextFetchedEnemy: {fileID: 0}
   EnemyList: []
@@ -11195,7 +11166,6 @@ MonoBehaviour:
   - {fileID: 6377399004590784155, guid: 3864d01fea688b344bbcac72cebc6c09, type: 3}
   - {fileID: 5395008424293832843, guid: ef13f34fcb0f33d4e84c302fdbae406f, type: 3}
   - {fileID: 7888121162452719254, guid: 67a725dbe4228ee40b336fd831ab7499, type: 3}
-  - {fileID: 1475901519609956, guid: 62f19d1f6ab5e1c478f816d41db7c38e, type: 3}
   Bots: {fileID: 1374088744}
   Wave: 1
   Enemies: 50
