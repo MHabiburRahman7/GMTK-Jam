@@ -259,6 +259,8 @@ namespace TestGame.Player
         }
 
         public void CheckWeaponUnlock() {
+            if(!fetchedEnemy)
+                return;
             Bots.BotCharacter bot = fetchedEnemy.GetComponent<Bots.BotCharacter>();
             if (bot != null && bot.Weapon != null) {
                 foreach(Weapons.Weapon weapon in m_playerChar.Controller.WeaponSlots) {

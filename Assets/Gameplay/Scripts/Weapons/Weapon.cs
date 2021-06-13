@@ -50,6 +50,11 @@ namespace TestGame.Weapons
         [Header("Sockets")]
         public Transform Ejector;
 
+        [Header("Sounds")]
+        public AudioClip shootingSound;
+
+        private AudioSource weaponSound;
+
         public void SpawnAmmo(float spread)
         {
             
@@ -101,6 +106,8 @@ namespace TestGame.Weapons
         {
             this.m_Timer = 0.0F;
             player = FindObjectOfType<TestGame.Player.PlayerCharacter>();
+            weaponSound = GetComponent<AudioSource>();
+
         }
 
         private void Update()
@@ -121,6 +128,7 @@ namespace TestGame.Weapons
                 // Spawn bullet.
                 //
                 this.SpawnAmmo(this.Spread);
+                weaponSound.PlayOneShot(shootingSound);
                 return true;
             }
             

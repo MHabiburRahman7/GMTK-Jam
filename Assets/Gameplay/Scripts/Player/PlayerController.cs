@@ -616,7 +616,7 @@ namespace TestGame.Player
                 // Shoot.
                 //
                 if (this.CurrentWeapon.Shoot())
-                    this.Character.TakeDamage(CurrentWeapon.energyPerShot);
+                    this.Character.TakeDamage(CurrentWeapon.energyPerShot, true);
             }
         }
 
