@@ -16,7 +16,7 @@ namespace TestGame
         public float angleChangingSpeed;
 
         //public int collisionMask=1<<6;
-        private Vector2 prevPos;
+        private Vector3 prevPos;
         private float distance = 0.0F;
 
         void FixedUpdate()
@@ -32,7 +32,7 @@ namespace TestGame
 
             rigidBody.velocity = transform.up * speed;
 
-            var distanceDuringUpdate = Vector2.Distance(rigidBody.position, prevPos);
+            var distanceDuringUpdate = Vector3.Distance(rigidBody.position, prevPos);
             distance += distanceDuringUpdate;
 
             //RaycastHit hit;
@@ -52,7 +52,7 @@ namespace TestGame
 
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.collider.CompareTag())
+            if (collision.collider.CompareTag("Player"))
                 OnCollide(collision.collider);
         }
         void OnExpire() { Destroy(this); }

@@ -10,7 +10,7 @@ namespace TestGame
         Cone,
         SingleTarget
     }
-    [CreateAssetMenu(fileName = "HitShape.asset", menuName = "Weapons/Shape")]
+   // [CreateAssetMenu(fileName = "HitShape.asset", menuName = "Weapons/Shape")]
     public class HitShape : MonoBehaviour
     {
         public float radius;
