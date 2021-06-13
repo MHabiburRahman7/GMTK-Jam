@@ -56,7 +56,7 @@ namespace TestGame.Player
                     nextFetchedEnemy = null;
                     CreatePoints();
                     CheckWeaponUnlock();
-                    AdjustThePlayer(true, true);
+                    AdjustThePlayer(false, true);
                 }
                 else if (Input.GetMouseButtonUp(1))
                 {

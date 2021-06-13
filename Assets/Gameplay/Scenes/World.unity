@@ -7717,7 +7717,7 @@ MonoBehaviour:
   EnemyList: []
   m_playerChar: {fileID: 0}
   m_botChar: {fileID: 0}
-  countDown: 5
+  countDown: 6
 --- !u!120 &448284169
 LineRenderer:
   m_ObjectHideFlags: 0
