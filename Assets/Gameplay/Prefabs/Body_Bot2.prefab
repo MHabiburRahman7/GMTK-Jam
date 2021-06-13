@@ -30,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116633975480504}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.000000044703484}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!33 &33030818601114524
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116633975480504}
-  m_Mesh: {fileID: 4300000, guid: aed99351c8bfe904aadc39a0208383f8, type: 3}
+  m_Mesh: {fileID: -2552015213372128183, guid: e9eaa2908d60a5540b3b8d63db98d320, type: 3}
 --- !u!23 &23120363064011084
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd799511b59f5ff478f41062312d7d38, type: 2}
+  - {fileID: 2100000, guid: af62894cd73c261408a64ff9155f3b8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!195 &195959340253060326
 NavMeshAgent:
@@ -134,10 +134,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.7951729
+  m_Radius: 0.05
+  m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8975866, z: 0}
+  m_Center: {x: 0, y: -0.01, z: -0.03}
 --- !u!114 &114952428698129576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f1f8e39ca72704e99dd33f56f35778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EvaluationTimeout: 0
   EvaluationInterval: 0.333
+  regular_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879, type: 2}
+  tethered_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879,
+    type: 2}
+  current_controller: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   PathEvaluationCounter: 0
 --- !u!114 &114534868190817868
@@ -178,3 +183,4 @@ MonoBehaviour:
   Controller: {fileID: 0}
   MeleeAttackTimer: 0
   HitAndRunTimer: 0
+  isCharging: 0
