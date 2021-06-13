@@ -27,6 +27,7 @@ namespace TestGame.Weapons
         public float explosionRadius = 0f;
         public bool isEMP = false;
         public GameObject EMPPrefab;
+        public GameObject explosionPrefab;
 
         //
         // A rigid body to push.
@@ -79,6 +80,7 @@ namespace TestGame.Weapons
                     //spawn an area that slows enemies down
                     Instantiate(EMPPrefab, collision.GetContact(0).point, EMPPrefab.transform.rotation);
                 } else {
+                    Instantiate(explosionPrefab, collision.GetContact(0).point, explosionPrefab.transform.rotation);
                     //get all objects in the radius of the explosion
                     Collider[] inRadius = Physics.OverlapSphere(collision.GetContact(0).point, explosionRadius);
                     foreach(Collider touched in inRadius) {
