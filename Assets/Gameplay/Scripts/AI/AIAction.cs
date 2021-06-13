@@ -21,7 +21,7 @@ namespace TestGame.AI
         /// </summary>
         /// <param name="context">A context.</param>
         /// <returns>Score</returns>
-        public float Score(IAIContext context)
+        public virtual float Score(IAIContext context)
         {
             //
             // Assume initial score.

@@ -6501,8 +6501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e36b40d127d5b244a11687861f5d8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Energy: 100
-  EnergyMax: 100
+  Energy: 1000
+  EnergyMax: 1000
   IsAlive: 1
   Controller: {fileID: 0}
 --- !u!195 &365629684
@@ -7829,10 +7829,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segments: 50
   minRange: 10
-  p_healtIncrease: 2
+  p_healtIncrease: 4
   p_healthDecrease: 2
   e_healthIncrease: 0
-  e_healthDecrease: 2
+  e_healthDecrease: 4
   fetchedEnemy: {fileID: 0}
   nextFetchedEnemy: {fileID: 0}
   EnemyList: []
@@ -11201,11 +11201,11 @@ MonoBehaviour:
   - {fileID: 546589946}
   - {fileID: 793558751}
   BotPrefabs:
-  - {fileID: 1475901519609956, guid: 4f4227cd504977c4eb31aafb16d42a1e, type: 3}
+  - {fileID: 1475901519609956, guid: d8c3f4395c316ac4fab5ecb8a6e027e3, type: 3}
+  - {fileID: 1475901519609956, guid: c953568fd3022884486959f56f1c7fc0, type: 3}
   - {fileID: 6377399004590784155, guid: 3864d01fea688b344bbcac72cebc6c09, type: 3}
   - {fileID: 5395008424293832843, guid: ef13f34fcb0f33d4e84c302fdbae406f, type: 3}
   - {fileID: 7888121162452719254, guid: 67a725dbe4228ee40b336fd831ab7499, type: 3}
-  - {fileID: 1475901519609956, guid: 62f19d1f6ab5e1c478f816d41db7c38e, type: 3}
   Bots: {fileID: 1374088744}
   Wave: 1
   Enemies: 50

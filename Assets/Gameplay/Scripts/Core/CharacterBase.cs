@@ -49,7 +49,7 @@ namespace TestGame.Core
         {
         }
 
-        public void AddHealth(float points)
+        public virtual void AddHealth(float points)
         {
             this.Energy = this.Energy + points;
         }

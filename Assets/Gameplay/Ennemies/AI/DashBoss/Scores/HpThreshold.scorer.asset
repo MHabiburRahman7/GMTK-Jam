@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 068e5bc14548cdd4391ad8e4adc15d92, type: 3}
-  m_Name: Cooldown.scorer
+  m_Script: {fileID: 11500000, guid: 5aade3317977dad47919d5eafef03959, type: 3}
+  m_Name: HpThreshold.scorer
   m_EditorClassIdentifier: 
-  Duration: 5
-  PositiveScore: 100
-  NegativeScore: -500
+  ScoreIfMore: -500
+  ScoreIfLess: 1000
+  Threshold: 0.5
+  UsePercent: 1

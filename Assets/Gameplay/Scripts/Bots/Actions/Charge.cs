@@ -74,7 +74,7 @@ namespace TestGame.Bots.Actions
                     //
 
                     bot.isCharging = true;
-                    agent.speed = bot.Speed * 3;
+                    agent.speed = bot.Speed * 5;
                     bot.Controller.m_EvaluationTimeout = Duration;
                 }
                 return false;
@@ -110,6 +110,7 @@ namespace TestGame.Bots.Actions
                     bot.Controller.m_EvaluationTimeout = -1;
 
                     agent.speed = bot.Speed;
+                    agent.isStopped=true;
                     //
                     // Reset hit-and-run.
                     //

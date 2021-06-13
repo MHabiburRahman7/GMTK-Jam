@@ -24,6 +24,7 @@ namespace TestGame.Weapons
         Shotgun,
         Explosive,
         Sniper,
+        Laser,
     }
 
     /// <summary>
@@ -38,6 +39,7 @@ namespace TestGame.Weapons
         public float Damage;
         public float FireInterval;
         public int numberOfProjectiles = 1;
+        public float laserDelay;
 
         [Header("Weapon Avatar")]
         public Sprite AvatarImage;
@@ -120,9 +122,22 @@ namespace TestGame.Weapons
                 //
                 // Spawn bullet.
                 //
-                this.SpawnAmmo(this.Spread);
+                if (this.WeaponType != WeaponType.Laser)
+                {
+                    this.SpawnAmmo(this.Spread);
+                }
+                else
+                {
+                    StartCoroutine(FireLaser());
+                }
                 player.Energy -= energyPerShot;
             }
+        }
+        public IEnumerator FireLaser()
+        {
+            //TODO: show small laser
+            yield return new WaitForSeconds(laserDelay); 
+            //TODO: fire
         }
     }
 }

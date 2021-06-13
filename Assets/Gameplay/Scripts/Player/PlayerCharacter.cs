@@ -21,6 +21,15 @@ namespace TestGame.Player
             //
             HudController.Instance.NotifyUpdateHealth();
         }
+        public override void AddHealth(float points)
+        {
+            base.TakeDamage(points);
+
+            //
+            // When player takes damage, notify HUD to update itself.
+            //
+            HudController.Instance.NotifyUpdateHealth();
+        }
 
         protected override void OnCharacterDied()
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TestGame.AI;
+using System;
 
 namespace TestGame.Bots.Scorers
 {
@@ -24,20 +25,25 @@ namespace TestGame.Bots.Scorers
         /// </summary>
         public float NegativeScore;
 
-       // public float CurrentDuration=0;
-       // public float lastTime = 0;
+        //selects which timer to use
+        public int Selector;
         public override float Score(IAIContext context)
         {
 
             var bot = context as BotCharacter;
+            if (bot.Cd_CurrentDuration.Length <= Selector)
+            {
+                Array.Resize(ref bot.Cd_CurrentDuration, Selector+1);
+                Array.Resize(ref bot.Cd_lastTime, Selector+1);
+            }
 
-            if (bot.Cd_CurrentDuration>0){
-                bot.Cd_CurrentDuration -= Time.time- bot.Cd_lastTime;
-                bot.Cd_lastTime = Time.time;
+            if (bot.Cd_CurrentDuration[Selector] > 0){
+                bot.Cd_CurrentDuration[Selector] -= Time.time - bot.Cd_lastTime[Selector];
+                bot.Cd_lastTime[Selector] = Time.time;
                 return NegativeScore;
             }
             else{
-                bot.Cd_CurrentDuration = 0;
+                bot.Cd_CurrentDuration[Selector] = 0;
                 return PositiveScore;
             }
         }
@@ -45,8 +51,8 @@ namespace TestGame.Bots.Scorers
         public override void OnAction(IAIContext context){
 
             var bot = context as BotCharacter;
-            bot.Cd_CurrentDuration = Duration;
-            bot.Cd_lastTime = Time.time;
+            bot.Cd_CurrentDuration[Selector] = Duration;
+            bot.Cd_lastTime[Selector] = Time.time;
         }
 
     }

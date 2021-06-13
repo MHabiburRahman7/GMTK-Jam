@@ -8,12 +8,9 @@ using UnityEngine.AI;
 
 namespace TestGame.Bots
 {
-    public class BotController : AIAgent
+    public class BossController : AIAgent
     {
-        public Controller regular_controller;
-        public Controller tethered_controller;
- [HideInInspector]
-        public Controller current_controller;
+        public Controller controller;
 
         public NavMeshAgent NavMeshAgent;
 
@@ -26,18 +23,14 @@ namespace TestGame.Bots
             return this.m_Character;
         }
 
-        public void tether(bool isTethered=true){
-            current_controller=isTethered?tethered_controller:regular_controller;
-            this.SetActions(current_controller.Actions);
-        }
 
         protected override void Start()
         {
             this.NavMeshAgent = this.GetComponent<NavMeshAgent>();
             this.m_Character = this.GetComponent<BotCharacter>();
             this.m_Character.Target = GameObject.FindGameObjectWithTag("Player").transform;
-            tether(false);
 
+            this.SetActions(controller.Actions);
             //
             //  BUG:
             //      Agent jumps large distance when spawned.

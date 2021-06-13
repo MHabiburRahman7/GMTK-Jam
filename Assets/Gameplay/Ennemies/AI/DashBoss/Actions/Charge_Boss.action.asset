@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5635297fc573c4a47b2010ac6de10a8a, type: 3}
-  m_Name: Charge.action
+  m_Name: Charge_Boss.action
   m_EditorClassIdentifier: 
   Scorers:
   - {fileID: 11400000, guid: 2b3073e67372d7345a6c313820ecff14, type: 2}
   - {fileID: 11400000, guid: 2e950d8cd45e2764da049fe7b4bc8103, type: 2}
   - {fileID: 11400000, guid: b842fd7c973ebf744ac9cd106543d13e, type: 2}
+  - {fileID: 11400000, guid: a046303b7ac2f524fb9d8c94999b592e, type: 2}
   Interval: 0.1
   Duration: 2
   MinAngle: 10
   RotationAngle: 90
-  targetPosition: {x: -17.129517, y: 0.01866126, z: -1.8472723}
+  targetPosition: {x: 19.187807, y: 0.01866126, z: -20.63779}

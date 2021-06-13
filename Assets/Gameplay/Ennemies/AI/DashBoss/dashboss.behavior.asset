@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd8ebef57f0ea54d8c0c404b60b26a9, type: 3}
+  m_Name: dashboss.behavior
+  m_EditorClassIdentifier: 
+  Range1: 10
+  Range2: 20
+  Actions:
+  - {fileID: 11400000, guid: 9bfe5528a1c71a647a7145bd17d06be6, type: 2}
+  - {fileID: 11400000, guid: fd74f678f1865424eab6cfafb502e2cb, type: 2}
+  - {fileID: 11400000, guid: 82ade56edb1901f4f90bf01fc9432aa3, type: 2}
+  - {fileID: 11400000, guid: bb5fe7903c726b442b2bd15501d4b36e, type: 2}
+  - {fileID: 11400000, guid: 8673ebf5c98277b4c8c41b68c9aee4fa, type: 2}
+  - {fileID: 11400000, guid: 31ab624ebdaae5b47a422ba603a163d4, type: 2}
