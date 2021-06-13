@@ -113,7 +113,7 @@ namespace TestGame.Player
 
         public void deleteLine()
         {
-            Debug.Log("delete called");
+            //Debug.Log("delete called");
             line.useWorldSpace = false;
             line.positionCount = 0;
 

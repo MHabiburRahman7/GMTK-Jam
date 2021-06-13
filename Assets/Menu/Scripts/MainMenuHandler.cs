@@ -10,6 +10,7 @@ namespace TestGame.Menu
     public class MainMenuHandler : MonoBehaviour
     {
         public GameObject LoadingPanel;
+        public GameObject TutorialPanel;
         public Image LoadingProgress;
 
         public Text HighScoreContent;
@@ -39,6 +40,16 @@ namespace TestGame.Menu
                 this.LoadingProgress.fillAmount = result.progress;
                 yield return null;
             }
+        }
+
+        public void OpenTutorial()
+        {
+            TutorialPanel.gameObject.SetActive(true);
+        }
+
+        public void CloseTutorial()
+        {
+            TutorialPanel.gameObject.SetActive(false);
         }
 
         public void ExitGame()
