@@ -128,11 +128,13 @@ MonoBehaviour:
   MeleeAttackRange: 2
   MeleeAttackInterval: 1
   MeleeHitAndRun: 1
-  Weapon: {fileID: 0}
+  Weapon: {fileID: 114953865434013066, guid: 07ecd541699cc4b4887a4a1ac325f575, type: 3}
   Target: {fileID: 0}
   Controller: {fileID: 0}
   MeleeAttackTimer: 0
   HitAndRunTimer: 0
+  Cd_CurrentDuration: 0
+  Cd_lastTime: 0
   isCharging: 0
 --- !u!1001 &709576432549893574
 PrefabInstance:
