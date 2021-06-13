@@ -128,7 +128,7 @@ MonoBehaviour:
   MeleeAttackRange: 2
   MeleeAttackInterval: 1
   MeleeHitAndRun: 1
-  Weapon: {fileID: 0}
+  Weapon: {fileID: 114409117791835092, guid: ef0a4663189e4a6409d864aa7264c775, type: 3}
   Target: {fileID: 0}
   Controller: {fileID: 0}
   MeleeAttackTimer: 0

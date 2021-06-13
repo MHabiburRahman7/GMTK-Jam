@@ -17,7 +17,7 @@ namespace TestGame.Player
         public float minRange;
         //[Range(0, 100)]
         //public float playerHealth, botHealth;
-        [Range(0, 10)]
+        [Range(0, 100)]
         public float p_healtIncrease, p_healthDecrease, e_healthIncrease, e_healthDecrease;
 
 
@@ -55,6 +55,7 @@ namespace TestGame.Player
             {
                 if (EnemyFetched())
                 {
+                    CheckWeaponUnlock();
                     AdjustThePlayer(true, true);
                 }
                 else
@@ -183,7 +184,7 @@ namespace TestGame.Player
 
             if (isAttached)
             {
-                if(m_playerChar.Energy < 100)
+                if(m_playerChar.Energy < m_playerChar.EnergyMax)
                     m_playerChar.AddHealth(p_healtIncrease * Time.deltaTime);
 
                 if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 0)
@@ -211,7 +212,6 @@ namespace TestGame.Player
             {
                 //GAME OVER
                 m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime);
-                //fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
             }
         }
 
@@ -247,6 +247,21 @@ namespace TestGame.Player
         public void GetEnemies()
         {
             EnemyList =  GameObject.FindGameObjectsWithTag("Enemy");
+        }
+
+        public void CheckWeaponUnlock() {
+            Bots.BotCharacter bot = fetchedEnemy.GetComponent<Bots.BotCharacter>();
+            if (bot != null && bot.Weapon != null) {
+                Debug.Log("call");
+                foreach(Weapons.Weapon weapon in m_playerChar.Controller.WeaponSlots) {
+                    if (weapon.name == bot.Weapon.name){
+                        Debug.Log("already equipped: " + bot.Weapon.name);
+                        return;
+                    }
+                }
+                Debug.Log(bot.Weapon.AvatarImage.name);
+                m_playerChar.Controller.WeaponSlots.Add(bot.Weapon);
+            }
         }
 
     }
