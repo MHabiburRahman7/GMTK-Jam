@@ -10,13 +10,23 @@ namespace TestGame.Gameplay
     public class PauseMenuController : MonoBehaviour
     {
         public GameObject ResumeButton;
+        public GameObject GameOverObj;
 
         public void OnEnable()
         {
             var instance = GameController.Instance;
             if (instance != null)
             {
-                this.ResumeButton.SetActive(instance.Player.Character.IsAlive);
+                if (instance.Player.Character.IsAlive)
+                {
+                    this.ResumeButton.SetActive(true);
+                    this.GameOverObj.SetActive(false);
+                }
+                else {
+                    this.ResumeButton.SetActive(false);
+                    this.GameOverObj.SetActive(true);
+                }
+
             }
         }
 

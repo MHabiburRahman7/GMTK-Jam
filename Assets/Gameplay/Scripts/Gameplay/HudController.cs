@@ -29,8 +29,6 @@ namespace TestGame.Gameplay
 
         [Header("Current Weapon Panel")]
         public Image WeaponImage;
-        public Text WeaponClipAmmo;
-        public Text WeaponTotalAmmo;
 
         [Header("Wave Panel")]
         public Text WaveCurrent;
@@ -81,6 +79,11 @@ namespace TestGame.Gameplay
                 var progress = character.Energy / character.EnergyMax;
                 var fillAmount = Mathf.Clamp01(progress);
 
+                if (fillAmount <= 0.3f)
+                    this.EnergyBar.color = new Color(255f, 0f, 0f, 255f);
+                else
+                    this.EnergyBar.color = new Color(48f, 237f, 240f, 255f);
+
                 this.EnergyBar.fillAmount = fillAmount;
 
                 //
@@ -103,7 +106,7 @@ namespace TestGame.Gameplay
 
         public void UpdateWeapon(Weapon weapon)
         {
-            this.WeaponImage.sprite = weapon.AvatarImage;
+           this.WeaponImage.sprite = weapon.AvatarImage;
         }
 
         public void UpdateWaveCountdown(bool show, bool waveNumber, int value)
