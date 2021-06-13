@@ -24,7 +24,6 @@ namespace TestGame
             NavMeshAgent bot = other.gameObject.GetComponent<NavMeshAgent>();
 
             if (player != null) {
-                Debug.Log("playerEntered");
                 player.DivideCurrentSpeed(divisionFactor);
             }
 

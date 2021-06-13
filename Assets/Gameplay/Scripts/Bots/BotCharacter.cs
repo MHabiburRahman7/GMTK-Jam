@@ -67,7 +67,7 @@ namespace TestGame.Bots
             //
             if (this.Weapon != null)
             {
-                GameObject.Destroy(this.Weapon);
+                //GameObject.Destroy(this.Weapon);
             }
 
             //

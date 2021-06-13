@@ -106,7 +106,6 @@ namespace TestGame.Bots.Actions
                     // Reset hit-and-run.
                     //
                     bot.HitAndRunTimer = 0.0F;
-
                     player.TakeDamage(bot.MeleeAttack);
                 }
             }

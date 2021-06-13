@@ -108,7 +108,7 @@ namespace TestGame.Weapons
             this.m_Timer += Time.deltaTime;
         }
 
-        public void Shoot()
+        public bool Shoot()
         {
             if (this.m_Timer >= this.FireInterval)
             {
@@ -121,8 +121,10 @@ namespace TestGame.Weapons
                 // Spawn bullet.
                 //
                 this.SpawnAmmo(this.Spread);
-                player.Energy -= energyPerShot;
+                return true;
             }
+            
+            return false;
         }
     }
 }

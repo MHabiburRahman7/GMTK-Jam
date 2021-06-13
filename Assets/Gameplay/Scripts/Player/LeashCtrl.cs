@@ -17,7 +17,7 @@ namespace TestGame.Player
         public float minRange;
         //[Range(0, 100)]
         //public float playerHealth, botHealth;
-        [Range(0, 10)]
+        [Range(0, 100)]
         public float p_healtIncrease, p_healthDecrease, e_healthIncrease, e_healthDecrease;
 
         public GameObject fetchedEnemy, nextFetchedEnemy;
@@ -54,8 +54,9 @@ namespace TestGame.Player
                 if (Input.GetMouseButton(1))
                 {
                     nextFetchedEnemy = null;
-                    //Debug.Log("leash released");
                     CreatePoints();
+                    CheckWeaponUnlock();
+                    AdjustThePlayer(true, true);
                 }
                 else if (Input.GetMouseButtonUp(1))
                 {
@@ -204,7 +205,7 @@ namespace TestGame.Player
 
             if (isAttached)
             {
-                if(m_playerChar.Energy < 100)
+                if(m_playerChar.Energy < m_playerChar.EnergyMax)
                     m_playerChar.AddHealth(p_healtIncrease * Time.deltaTime);
 
                 if (fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 0)
@@ -231,8 +232,8 @@ namespace TestGame.Player
             else
             {
                 //GAME OVER
+                Debug.Log(this.gameObject.name);
                 m_playerChar.TakeDamage(p_healthDecrease * Time.deltaTime);
-                //fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
             }
         }
 
@@ -256,6 +257,18 @@ namespace TestGame.Player
         public void GetEnemies()
         {
             EnemyList =  GameObject.FindGameObjectsWithTag("Enemy");
+        }
+
+        public void CheckWeaponUnlock() {
+            Bots.BotCharacter bot = fetchedEnemy.GetComponent<Bots.BotCharacter>();
+            if (bot != null && bot.Weapon != null) {
+                foreach(Weapons.Weapon weapon in m_playerChar.Controller.WeaponSlots) {
+                    if (weapon.name == bot.Weapon.name){
+                        return;
+                    }
+                }
+                m_playerChar.Controller.WeaponSlots.Add(bot.Weapon);
+            }
         }
 
     }
