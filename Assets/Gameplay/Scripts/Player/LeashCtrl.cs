@@ -198,7 +198,7 @@ namespace TestGame.Player
 
             if (change)
             {
-                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 1)
+                if(fetchedEnemy != null && fetchedEnemy.GetComponent<Bots.BotCharacter>().Energy > 0)
                     fetchedEnemy.GetComponent<Bots.BotController>().tether(isAttached);
                 change = false;
             }
