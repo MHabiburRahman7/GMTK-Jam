@@ -6,6 +6,7 @@ using TestGame.Bots;
 using TestGame.Weapons;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 namespace TestGame.Player
 {
@@ -28,6 +29,8 @@ namespace TestGame.Player
         // Body of player. Base game object rotates separately. Body rotates toward pointer.
         //
         public GameObject Body;
+
+        public GameObject Legs; // legs of the player
 
         //
         // Laser pointer. It really should be part of gun...
@@ -74,10 +77,15 @@ namespace TestGame.Player
         //
         public float MoveSpeed = 4.0F;
 
-        //
-        // Sprint speed.
-        //
-        public float SprintSpeed = 7.0F;
+        //distance of the dash in meters
+        public float dashDistance = 2f;
+
+        //time between two uses of dash
+        public float dashCooldown = 2f;
+
+        public ParticleSystem dashPlayerParticles; //player particles using energy to dash
+
+        public ParticleSystem dashParticles; //ground particles on dash
 
         //
         // Current speed.
@@ -88,8 +96,12 @@ namespace TestGame.Player
         // Look angle.
         //
         private float m_LookAngle = 0.0F;
+
+        private bool canDash = true;
         
         private bool m_IsRunning = false;
+
+        private Animator animator;
 
         //
         // Current control type.
@@ -126,6 +138,9 @@ namespace TestGame.Player
         
         private void Start()
         {
+
+            animator = Legs.GetComponent<Animator>();
+
             //
             // Acquires navmesh agent.
             //
@@ -162,6 +177,11 @@ namespace TestGame.Player
             // And select first weapon.
             //
             this.SelectWeapon(0);
+
+            //
+            // Adjust speed.
+            //
+            this.m_CurrentSpeed = this.MoveSpeed;
         }
 
         /// <summary>
@@ -194,6 +214,10 @@ namespace TestGame.Player
                 Input.GetAxis("Horizontal"),
                 Input.GetAxis("Vertical")
             );
+
+            if (rawMove == Vector2.zero) {
+                //stop the animation
+            }
 
             //
             // Initial angles for move and look.
@@ -229,6 +253,8 @@ namespace TestGame.Player
             // Mouse requires special handling, because actor will stare at mouse regardles of its movement.
             //
             lookDirectionAngle = FixupKeyboardDirectionAngle(lookDirectionAngle);
+
+            HandleDash(-Body.transform.right);
 
             //
             //  Angle = 
@@ -273,9 +299,14 @@ namespace TestGame.Player
                 //
                 // Add-up stick space rotation to controller orientation.
                 //
-                var rotation = Quaternion.Euler(0.0F, m_LookAngle, 0.0F) * this.transform.rotation;
-                this.Body.transform.rotation = Quaternion.RotateTowards(this.Body.transform.rotation, rotation, this.RotationAngularSpeed * deltaTime);
+                var difference = Quaternion.Euler(moveDirectionAngle + 90f, 0f, 0);
+
+                var rotation = Quaternion.Euler(m_LookAngle + 90f, 0.0f, 0.0F) * Quaternion.Inverse(difference);
+                this.Body.transform.localRotation = Quaternion.RotateTowards(this.Body.transform.localRotation, Quaternion.Inverse(rotation), this.RotationAngularSpeed * deltaTime);
             }
+
+            var legsRotation = Quaternion.Euler(0, moveDirectionAngle + 90f, 0);
+            Legs.transform.localRotation = Quaternion.RotateTowards(this.Legs.transform.localRotation, legsRotation, this.RotationAngularSpeed * deltaTime);
         }
 
         private void HandleWeaponChange()
@@ -351,11 +382,6 @@ namespace TestGame.Player
                 direction.Normalize();
 
                 //
-                // Adjust speed.
-                //
-                this.m_CurrentSpeed = this.m_IsRunning ? this.SprintSpeed : this.MoveSpeed;
-
-                //
                 // Compute relative move vector.
                 //
                 direction *= this.m_CurrentSpeed * deltaTime;
@@ -372,6 +398,31 @@ namespace TestGame.Player
             }
 
             return moveDirectionAngle;
+        }
+
+        private void HandleDash(Vector3 dashDirection) {
+            if (Input.GetButtonDown("Dash") && canDash) {
+                //spawn the particles before dashing so aprticles are spawn of the beginning point
+                Instantiate(dashParticles, transform.position, Quaternion.Euler(dashDirection));
+                Instantiate(dashPlayerParticles, transform.position, Quaternion.Euler(dashDirection));
+
+                //moves the player
+                this.m_Agent.Move(dashDirection * dashDistance);
+
+                //landing particles
+                Instantiate(dashPlayerParticles, transform.position, Quaternion.Euler(dashDirection));
+
+                //processes cooldown and disallows other dashes until it's up again
+                StartCoroutine("DashCooldown");
+                canDash = false;
+            }
+        }
+
+        //processes the cooldown of the dash
+        // waits for 2 seconds, then allows to dash again
+        private IEnumerator DashCooldown() {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
         }
 
         private void RotateCamera(float deltaTime)
@@ -468,7 +519,7 @@ namespace TestGame.Player
                 //
                 // Just reload weapon.
                 //
-                this.CurrentWeapon.Reload();
+                //this.CurrentWeapon.Reload();
             }
         }
 
@@ -493,7 +544,7 @@ namespace TestGame.Player
                     //
                     // If so, grab ammo from it - our is better.
                     //
-                    current.GrabAmmo(weapon);
+                    //current.GrabAmmo(weapon);
                 }
             }
         }
@@ -564,6 +615,14 @@ namespace TestGame.Player
                 //
                 this.CurrentWeapon.Shoot();
             }
+        }
+
+        public void DivideCurrentSpeed(float divisionFactor) {
+            m_CurrentSpeed /= divisionFactor;
+        }
+
+        public void RestoreBaseSpeed() {
+            m_CurrentSpeed = MoveSpeed;
         }
     }
 }

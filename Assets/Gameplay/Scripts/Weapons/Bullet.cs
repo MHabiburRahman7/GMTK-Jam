@@ -24,6 +24,10 @@ namespace TestGame.Weapons
         //
         public float Force;
 
+        public float explosionRadius = 0f;
+        public bool isEMP = false;
+        public GameObject EMPPrefab;
+
         //
         // A rigid body to push.
         //
@@ -58,13 +62,33 @@ namespace TestGame.Weapons
 
         private void OnCollisionEnter(Collision collision)
         {
-            var character = collision.gameObject.GetComponent<CharacterBase>();
-            if (character != null)
-            {
-                //
-                // Cause damage to character.
-                //
-                character.TakeDamage(this.Damage);
+            if (collision.gameObject.tag == "bullet") 
+                return;
+            
+            if (explosionRadius <= 0) {
+                var character = collision.gameObject.GetComponent<CharacterBase>();
+                if (character != null)
+                {
+                    //
+                    // Cause damage to character.
+                    //
+                    character.TakeDamage(this.Damage);
+                }
+            } else {
+                if (isEMP) {
+                    //spawn an area that slows enemies down
+                    Instantiate(EMPPrefab, collision.GetContact(0).point, EMPPrefab.transform.rotation);
+                } else {
+                    //get all objects in the radius of the explosion
+                    Collider[] inRadius = Physics.OverlapSphere(collision.GetContact(0).point, explosionRadius);
+                    foreach(Collider touched in inRadius) {
+                        //if the current object is a character, deal damage
+                        var character = touched.gameObject.GetComponent<CharacterBase>();
+                        if (character != null) {    
+                            character.TakeDamage(this.Damage);
+                        }
+                    }
+                }
             }
 
             Destroy(this.gameObject);

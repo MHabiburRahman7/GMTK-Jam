@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129155824929262}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 4008344060552386}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!33 &33812775017553006
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129155824929262}
-  m_Mesh: {fileID: 4300000, guid: 6f5410bde735ec1459ddbb0e70b39339, type: 3}
+  m_Mesh: {fileID: -1059854350617279784, guid: d7f2665f292e3fb40847272eb8edf56c, type: 3}
 --- !u!23 &23561426097066778
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7c70a001096375418f893f2d1b10e23, type: 2}
+  - {fileID: 2100000, guid: af62894cd73c261408a64ff9155f3b8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +101,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!195 &195805997637176470
 NavMeshAgent:
@@ -135,10 +135,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.7951729
+  m_Radius: 0.05
+  m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8975866, z: 0}
+  m_Center: {x: 0, y: -0.01, z: -0.03}
 --- !u!114 &114381376224984732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EvaluationTimeout: 0
   EvaluationInterval: 0.333
-  regular_controller: {fileID: 0}
-  tethered_controller: {fileID: 0}
+  regular_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879, type: 2}
+  tethered_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879,
+    type: 2}
   current_controller: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   PathEvaluationCounter: 0
@@ -170,12 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8050b4c656b440543b495d45cd599e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
-  HealthMax: 100
-  SuperHealthMax: 0
-  Armor: 0
-  ArmorMax: 0
-  SuperArmorMax: 0
+  Energy: 100
+  EnergyMax: 100
   IsAlive: 1
   Speed: 3
   MeleeAttack: 1
@@ -285,16 +282,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ed1bc43fc0c24d9040e1f393ab721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxClipAmmo: 11
-  CurrentClipAmmo: 11
-  MaxBagAmmo: 55
-  CurrentBagAmmo: 55
+  energyPerShot: 0
   WeaponType: 0
-  InfiniteAmmo: 1
   Spread: 10
   Damage: 5
   FireInterval: 0.6
-  ReloadTime: 2
+  numberOfProjectiles: 1
   AvatarImage: {fileID: 21300000, guid: 55f1b396ac8862a4db100efdb9d2c148, type: 3}
   MuzzleFlash: {fileID: 19804540, guid: 1c6bb34559f691b43ac387d2ddcba887, type: 3}
   BulletTracer: {fileID: 1140746222208220, guid: 05782b49a19b1884c8941d0ec812bf7e,
