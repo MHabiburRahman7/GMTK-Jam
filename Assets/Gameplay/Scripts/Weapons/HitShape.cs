@@ -11,13 +11,15 @@ namespace TestGame
         SingleTarget
     }
     [CreateAssetMenu(fileName = "HitShape.asset", menuName = "Weapons/Shape")]
-    public class HitShape : ScriptableObject
+    public class HitShape : MonoBehaviour
     {
         public float radius;
         public float angle;
         public float direction;
         public Vector3 targetPosition;
+        public float DamageScale;
         public Effect[] effects;
+
         [TagSelector]
         public string[] TagFilterArray = new string[] { };
         void doEffects(GameObject Collider)
