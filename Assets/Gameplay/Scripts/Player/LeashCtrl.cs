@@ -25,8 +25,11 @@ namespace TestGame.Player
         public GameObject[] EnemyList;
         public PlayerCharacter m_playerChar;
         public Bots.BotCharacter m_botChar;
+        public AudioClip chargingSound;
 
         public float countDown;
+
+        private AudioSource source;
 
         //public RopeJointController m_ropeJointController;
         //public RopeControllerSimple m_ropeControllerSimple;
@@ -38,6 +41,8 @@ namespace TestGame.Player
             line.positionCount = 0;
             line.useWorldSpace = false;
             m_playerChar = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerCharacter>();
+            source = GetComponent<AudioSource>();
+            source.clip = chargingSound;
         }
 
         // Update is called once per frame
@@ -55,6 +60,8 @@ namespace TestGame.Player
                 {
                     nextFetchedEnemy = null;
                     CreatePoints();
+                    //play the charging sound
+                    source.Play();
                     CheckWeaponUnlock();
                     AdjustThePlayer(false, true);
                 }

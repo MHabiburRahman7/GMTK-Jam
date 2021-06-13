@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using TestGame.AI;
 using TestGame.Core;
 using TestGame.Gameplay;
@@ -25,6 +22,7 @@ namespace TestGame.Bots
         public float MeleeAttack;
         public float MeleeAttackRange;
         public float MeleeAttackInterval;
+        public AudioClip[] deathSounds;
 
         public bool MeleeHitAndRun;
 
@@ -43,14 +41,20 @@ namespace TestGame.Bots
         public float MeleeAttackTimer = 0.0F;
         public float HitAndRunTimer = 0.0F;
 
+        private AudioSource botAudio;
+
         private void Awake()
         {
             this.Controller = this.GetComponent<BotController>();
+            botAudio = GetComponent<AudioSource>();
         }
 
         protected override void OnCharacterDied()
         {
             base.OnCharacterDied();
+
+            int index = Random.Range(0, deathSounds.Count() - 1);
+            botAudio.PlayOneShot(deathSounds[index]);
 
             //
             // Notify wave controller that this bot died :(
