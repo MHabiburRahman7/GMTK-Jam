@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 114179114461924724}
   - component: {fileID: 114138893991024112}
   m_Layer: 0
-  m_Name: Body_Bot1
-  m_TagString: Untagged
+  m_Name: BOT_Aggro
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475901519609956}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.576, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475901519609956}
-  m_Mesh: {fileID: 4300000, guid: faa44eeaa83415f468c35638b811fe78, type: 3}
+  m_Mesh: {fileID: 4600906072512298543, guid: 15d0f6fb23f660643b7ba5d3fc0ab0a3, type: 3}
 --- !u!23 &23724198153704144
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51bb3607be1471743bf51ad4bc536598, type: 2}
+  - {fileID: 2100000, guid: af62894cd73c261408a64ff9155f3b8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +111,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1475901519609956}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.55
+  m_Radius: 0.06
   m_Speed: 3.5
   m_Acceleration: 64
   avoidancePriority: 50
@@ -120,8 +120,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.11
-  m_BaseOffset: 0
+  m_Height: 0.1
+  m_BaseOffset: 0.04
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!136 &136738116699937624
@@ -134,10 +134,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.7951729
+  m_Radius: 0.06
+  m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8975866, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!114 &114179114461924724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EvaluationTimeout: 0
   EvaluationInterval: 0.333
-  regular_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879, type: 2}
-  tethered_controller: {fileID: 11400000, guid: 3a099952f48d1424a862b8234fa9f879,
+  regular_controller: {fileID: 11400000, guid: 2f05bb2813813824480c0b8d5052316e, type: 2}
+  tethered_controller: {fileID: 11400000, guid: 2f05bb2813813824480c0b8d5052316e,
     type: 2}
   current_controller: {fileID: 0}
   NavMeshAgent: {fileID: 0}
@@ -170,12 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8050b4c656b440543b495d45cd599e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Energy: 100
-  EnergyMax: 100
+  Energy: 0
+  EnergyMax: 0
   IsAlive: 1
   Speed: 10
   MeleeAttack: 2
-  MeleeAttackRange: 2
+  MeleeAttackRange: 4
   MeleeAttackInterval: 1
   MeleeHitAndRun: 1
   Weapon: {fileID: 0}
